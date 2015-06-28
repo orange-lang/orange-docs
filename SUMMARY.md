@@ -36,3 +36,4 @@
   * [Modules](language/modules.md)
   * [Preprocessor Macros](language/macros.md)
   * [Inline Assembly](language/assembly.md)
+  * [Exceptions](language/exceptions.md)
