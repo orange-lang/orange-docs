@@ -10,3 +10,7 @@
    * [Source Format](language/source_format.md)
    * [Type System](language/type_system.md)
    * [Operators](language/operators.md)
+   * [Variables](language/variables.md)
+   * [Arrays](language/arrays.md)
+       * [Array Range](language/array_range.md)
+   * [Strings](language/strings.md)

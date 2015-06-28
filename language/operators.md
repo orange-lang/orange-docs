@@ -1,4 +1,5 @@
 # Operators
+**STATUS**: Implemented
 
 The following are the operators in Orange: `+`, `-`, `*`, `/`, `++`, `--`, `+=`, `-=`, `*=`, `/=`, `%`, `&&`, `||`, `and`, `or`, `xor`, `^`, `&`, `|`, `<`, `>`, `-`, `!`, `>=`, `<=`, `==`, `!=`
 
