@@ -25,3 +25,8 @@
     * [Unless Statement](language/conditionals/unless.md)
     * [Switch Statement](language/conditionals/switch.md)
     * [Ternary Operator](language/conditionals/ternary.md)
+  * [Functions](language/functions/functions.md)
+    * [Generics](language/functions/generics.md)
+    * [Name Mangling](language/functions/mangling.md)
+    * [Arrays in Functions](language/functions/arrays.md)
+    * [External Functions](language/functions/external.md)
