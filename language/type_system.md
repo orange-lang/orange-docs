@@ -1,4 +1,5 @@
 ## Type System
+**STATUS**: Partial Implementation<sup>1</sup>
 
 Every variable and expression has a type in Orange. Orange defines the following basic types for use in source programs:
 
@@ -41,3 +42,5 @@ By default, integers in orange default to signed 64-bit integers (i.e., `int64`)
 - `f` for float (only works with floating point numbers)
 
 Any floating point number requires a decimal plus one digit, like `5.0`. By default, a floating point number is a `double`, unless specified with the suffix `f`. That is to say, `5.0f` is a `float`. 
+
+<sup>1</sup> Unimplemented: `sizeof`
