@@ -30,3 +30,4 @@
     * [Name Mangling](language/functions/mangling.md)
     * [Arrays in Functions](language/functions/arrays.md)
     * [External Functions](language/functions/external.md)
+  * [Pointers](language/pointers.md)
