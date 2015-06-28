@@ -32,3 +32,4 @@
     * [External Functions](language/functions/external.md)
   * [Pointers](language/pointers.md)
   * [Classes](language/classes.md)
+  * [Enum](language/enum.md)
