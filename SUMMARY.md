@@ -31,3 +31,4 @@
     * [Arrays in Functions](language/functions/arrays.md)
     * [External Functions](language/functions/external.md)
   * [Pointers](language/pointers.md)
+  * [Classes](language/classes.md)
