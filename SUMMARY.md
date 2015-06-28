@@ -35,3 +35,4 @@
   * [Enum](language/enum.md)
   * [Modules](language/modules.md)
   * [Preprocessor Macros](language/macros.md)
+  * [Inline Assembly](language/assembly.md)
