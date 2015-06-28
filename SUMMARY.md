@@ -8,3 +8,5 @@
    * [2.1 Documentation Notation](language/notation.md) 
    * [2.2 Language Overview](language/overview.md)
    * [2.3 Source Format](language/source_format.md)
+   * [2.4 Type System](language/type_system.md)
+   * [2.5 Operators](langauge/operators.md)
