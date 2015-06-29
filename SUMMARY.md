@@ -32,6 +32,7 @@
     * [External Functions](language/functions/external.md)
   * [Pointers](language/pointers.md)
   * [Classes](language/classes.md)
+    * [Operator Overloading](language/overloading.md)
   * [Enum](language/enum.md)
   * [Modules](language/modules.md)
   * [Preprocessor Macros](language/macros.md)

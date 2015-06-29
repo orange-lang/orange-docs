@@ -1,5 +1,5 @@
 # Switch Statements 
-**STATUS**: Not Implemented 
+**STATUS**: Design Phase 
 
 Switch statements allow you to take an expression and execute code based on certain cases. Each given case can be one or more values, and a default case can be supplied if all other cases fail.
 
