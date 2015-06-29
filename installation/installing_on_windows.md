@@ -22,20 +22,15 @@ $ pacman -S mingw-w64-x86_64-boost
 $ pacman -S base-devel
 ```
 
-Next, download and install LLVM using MSYS2. If the installation directory with CMake is left unchanged, make sure the MSYS2 shell is run as Administrator, as it will install to `C:/Program Files (x86)`. 
-
-```sh
-$ mkdir build-llvm && cd build-llvm
-$ cmake ../llvm-src -G "MSYS Makefiles"
-$ make all install # this will take a while! 
-``` 
-
-Finally, you can build and use Orange.
+Now, you can build and use Orange. 
 
 ```sh 
+$ git submodule init && git submodule update 
 $ mkdir build-orange && cd build-orange 
 $ cmake ../orange -G "MSYS Makefiles"
 $ make all
 ``` 
 
-Installing to `C:/Program Files (x86)` won't work as `orange.exe` depends on some DLLs from MSYS2 and MINGW. You'll have to run `orange.exe` from inside of the MSYS2 shell. However, any program built using Orange will work outside of the MSYS2 shell. 
+Note that if you wish to install Orange and the dependencies it built (like LLVM), you will have to run MSYS2 as an Administrator as the default installation location is C:/Program Files (x86) on 64-bit machines. You can customize the installation path to avoid this. 
+
+However, using Orange installed to `C:/Program Files (x86)` won't work as `orange.exe` depends on some DLLs from MSYS2 and MINGW. You'll have to run `orange.exe` from inside of the MSYS2 shell. Regardless of this, any program built using Orange will work outside of the MSYS2 shell. 
