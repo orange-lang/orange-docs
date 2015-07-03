@@ -17,7 +17,7 @@ Every variable and expression has a type in Orange. Orange defines the following
 
 As you would expect, the difference between `int` and `uint` is that `uint` is unsigned, and the difference between `int8` and `int16` is that `int8` takes up 8 bits, while `int16` takes up 16 bits.
 
-The size in bytes of an expression or variable can be accessed via `sizeof`:
+The size in bytes of an expression or type can be accessed via `sizeof`:
 
     sizeof(_expression or type_)
 
