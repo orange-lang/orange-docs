@@ -33,3 +33,8 @@ Functions can also be nested in Orange.
     foo() 
 
 Note that with nested functions, we don't have access to `bar` from the global scope!
+
+## Multiple functions with the same name 
+**STATUS**: [Implemented](https://github.com/rfratto/orange/commit/d6c5ea), but not merged
+
+Orange supports having multiple functions with the same name, as long as they have different parameters.
