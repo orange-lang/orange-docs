@@ -23,8 +23,9 @@ When `importing` a package, all of the code inside of that package will be execu
 In the example above, we were creating a main program and the types of `add` were resolved. 
 
 When modules are compiled, they compile to two things:
-    1. Object files 
-    2. Orange Bitcode 
+
+1. Object files 
+2. Orange Bitcode 
 
 Object files are what you would normally expect functions and classes to compile to; they're code that you can link against to use. However, when using generic functions and classes, Orange can't compile those to native code since there are no defined types for them yet. 
 
