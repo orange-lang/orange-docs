@@ -3,7 +3,7 @@
 
 I'm going to provide an example for this entire section:
 
-    def add(a, b)
+    def add(var a, var b)
         return a + b
     end
 
@@ -11,7 +11,7 @@ When you call this function with two ints, `add(3, 5)`, a copy of `add` called `
 
 Not all of the parameters have to be generic for it to be a generic function. For example, 
 
-    def add(a, int b) 
+    def add(var a, int b) 
         return a + b
     end 
 

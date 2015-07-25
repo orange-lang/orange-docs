@@ -28,7 +28,7 @@ Here is an example of a class:
             return this.age >= 21
         end
 
-        def Person(name, age)
+        def Person(var name, var age)
             this.name = name
             this.age = age
         end
@@ -39,7 +39,7 @@ Here is an example of a class:
             return false
         end
 
-        def Cat(name, age)
+        def Cat(var name, var age)
             super(name, age)
         end
     end

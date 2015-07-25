@@ -18,7 +18,7 @@ Example:
             return Person("Some baby", 0)
         end
 
-        def Person(name, age)
+        def Person(var name, var age)
             me.name = name
             me.age = age
         end
