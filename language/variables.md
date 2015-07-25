@@ -13,7 +13,3 @@ If you omit the initial value when creating a variable with `var`, the type of t
 
     # ERROR; no value to determine type from  
     var a
-
-    # VALID; a is an int 
-    var a 
-    a = 0 
