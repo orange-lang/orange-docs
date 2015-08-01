@@ -26,7 +26,7 @@ Prompt" set.
   - Select 'Environment Variables'
   - Under 'System Variables', scroll down to the 'Path' item
   - Select the 'Path' item and click 'Edit'
-  - Append the system path with `;` and then the \bin folder of mingw64
+  - Append the system path with `;` and then the `bin` folder of mingw64
   	- In our example, one would append `;C:\mingw64\bin`
   - Press 'OK' on both dialogs to save your changes.
 4. From the Windows command prompt (`cmd` from the Start Menu):
