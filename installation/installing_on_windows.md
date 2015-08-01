@@ -15,9 +15,9 @@ assumes that you have git downloaded and installed from
 [here](https://msysgit.github.io), with "Use Git from the Windows Command
 Prompt" set.
 
-1. Download & extract MinGW-w64 to a location of your choice (C:\ is recommended)
-2. Download & extract LLVM to the same location as MinGW-w64 (if you extracted MinGW-w64 to C:\, extract LLVM to C:\mingw64)
-3. Add C:\mingw64\bin to your system path
+1. Download & extract MinGW-w64 to a location of your choice (`C:\` is recommended)
+2. Download & extract LLVM to the same location as MinGW-w64 (if you extracted MinGW-w64 to `C:\`, extract LLVM to `C:\mingw64`)
+3. Add `C:\mingw64\`bin to your system path
   - Open explorer
   - Right-click My Computer/This PC
   - Select 'Properties'
@@ -27,11 +27,11 @@ Prompt" set.
   - Under 'System Variables', scroll down to the 'Path' item
   - Select the 'Path' item and click 'Edit'
   - Append the system path with `;` and then the \bin folder of mingw64
-	- in our example, one would append `;C:\mingw64\bin`
-  - Press 'OK' on both dialogs to save your changes
+  	- In our example, one would append `;C:\mingw64\bin`
+  - Press 'OK' on both dialogs to save your changes.
 4. From the Windows command prompt (`cmd` from the Start Menu):
-  - type `gcc --version` and press enter. Ensure that some version of gcc is installed (this should work as MinGW-w64 includes it)
-  - type `llvm-config --version' and press enter. Ensure that version 3.6.2 is installed
+  - Run `gcc --version`. Ensure that some version of gcc is installed (this should work as MinGW-w64 includes it)
+  - Run `llvm-config --version`. Ensure that this command returns `3.6.2`. 
 5. From the command prompt, run these commands:
 
 ```sh
@@ -41,5 +41,5 @@ $ mkdir build
 $ cd build
 $ cmake .. -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX="[Your MinGW-w64 path, e.g. C:\mingw64]"
 $ mingw32-make all install
-$ orange --help #this is just to ensure it installed
+$ orange --help # this is just to ensure it installed
 ```
