@@ -14,9 +14,10 @@ The syntax for a function here may be confusing here, but all it states is that:
 4. A function can have a return statement at any point, which can return an expression.
 5. A function can provide a return type. It is optional as the return type is induced from the return statements.
 
-The arguments for a function can just be a variable name. If this is the case, generics are employed. Otherwise, if you provide an argument with a type, then the function is not generic and the types of the parameters will not change. 
+The arguments for a function require a type, but `var` can be used as a type
+to indicate a generic function.  
 
-Calling a function is very easy: 
+Calling a function is very easy:
 
     _functionName_ ( _argList_ )
 
@@ -30,11 +31,18 @@ Functions can also be nested in Orange.
         return bar()
     end
 
-    foo() 
+    foo()
 
-Note that with nested functions, we don't have access to `bar` from the global scope!
+Note that with nested functions, we don't have access to `bar` from the global
+scope!
 
-## Multiple functions with the same name 
-**STATUS**: [Implemented](https://github.com/rfratto/orange/commit/d6c5ea), but not merged
+## Inline Functions
 
-Orange supports having multiple functions with the same name, as long as they have different parameters.
+Orange also supports inline (read: one-line) functions:
+
+    def add(int a, int b): return a + b 
+
+## Multiple functions with the same name
+
+Orange supports having multiple functions with the same name, as long as they
+have different parameters.  
