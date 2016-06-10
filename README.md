@@ -1,17 +1,5 @@
 # Orange
 
-This is the user guide for the Orange programming language. Orange is a statically typed, multi-paradigm (imperative, object-oriented, generic) general purpose programming language. It's main goal is to be easy to use and develop both high-level (e.g., web applications) and low-level (e.g., operating systems, embedded development) applications.  
+This is the user guide for the Orange programming language. Orange is a statically typed, multi-paradigm (imperative, object-oriented, generic) general purpose programming language. It's main goal is to be easy to use and develop both high-level (e.g., web applications) and low-level (e.g., operating systems, embedded development) programs.  
 
-This is the documentation for the Orange programming language. Orange is a
-statically typed, multi-paradigm (imperative, object-oriented, reflective)
-systems programming language with focus on high productivity, features for
-DRY code, and a smooth syntax without sacrificing efficiency.
-
-Orange is still a work in progress and still under design changes; each
-relevant section will be noted with its implementation status. Section will
-either be marked as `Design Phase` for things that are still being designed,
-`Not Implemented` for things that are designed but not implemented, and
-`Implemented` for things that have been implemented into the code.
-
-As Orange is not yet stable, the syntax for any feature, including implemented
-ones, can change over time. 
+Orange is still a work in progress and is still sees design changes; all features and syntax are subject to change. The branch you are viewing now represents `concept-ver-2`, which is a complete re-imagining of the language and syntax to be more expressive and closer to the C-family of languages.
