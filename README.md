@@ -1,5 +1,7 @@
 # Orange
 
+This is the user guide for the Orange programming language. Orange is a statically typed, multi-paradigm (imperative, object-oriented, generic) general purpose programming language. It's main goal is to be easy to use and develop both high-level (e.g., web applications) and low-level (e.g., operating systems, embedded development) applications.  
+
 This is the documentation for the Orange programming language. Orange is a
 statically typed, multi-paradigm (imperative, object-oriented, reflective)
 systems programming language with focus on high productivity, features for
