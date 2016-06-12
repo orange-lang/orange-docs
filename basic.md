@@ -85,7 +85,7 @@ Another class of expressions are ones that resolve to a boolean `false` or `true
 	less_eq_to     -> expression "<=" expression
 	greater_eq_to  -> expression ">=" expression
 	not_equal      -> expression "!=" expression
-	equal          -> expression "=" expression
+	equal          -> expression "==" expression
 	boolean_and    -> expression "&&" expression
 	boolean_or     -> expression "||" expression
 

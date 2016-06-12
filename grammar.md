@@ -87,7 +87,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	less_eq_to           -> expression "<=" expression
 	greater_eq_to        -> expression ">=" expression
 	not_equal            -> expression "!=" expression
-	equal                -> expression "=" expression
+	equal                -> expression "==" expression
 	boolean_and          -> expression "&&" expression
 	boolean_or           -> expression "||" expression
 
