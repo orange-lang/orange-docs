@@ -99,12 +99,12 @@ Note that those last two operations requore both sides of the expression to be b
 
 The final class of expressions are those that operate on a single lvalue.
 
-	pre_increment  -> "++" lvalue
-	post_increment -> lvalue "++"
-	pre_decrement  -> "--" lvalue
-	post_decrement -> lvalue "--"
-	deference      -> "*" lvalue
-	reference      -> "&" lvalue
+	pre_increment  -> "++" expression
+	post_increment -> expression "++"
+	pre_decrement  -> "--" expression
+	post_decrement -> expression "--"
+	deference      -> "*" expression
+	reference      -> "&" expression
 
 	expression     -> pre_increment | post_increment | pre_decrement
 	expression     -> post_decrement | deference | reference

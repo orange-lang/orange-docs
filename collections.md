@@ -2,7 +2,7 @@
 
 A list of values in Orange can be created by appending an array-specifier to the data type when creating a variable. For example, `int[5]` is an array of 5 integers.
 
-    type               -> array
+    type               -> array_type
 	array_type         -> data_type "[" expression "]"
 
 	array_expression   -> "[" arr_elements "]"

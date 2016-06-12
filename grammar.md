@@ -2,81 +2,116 @@
 
 This is a compilation of the various bits of grammar defined throughout this documentation.
 
-	statement  -> var_decl term | expression term | class | block
-	statement  -> break_stmt term | continue_stmt term
-	statement  -> yield_stmt term | function | aggregate | extern_fn term
-	statement  -> interface | destructor | namespace term | import term
-	statement  -> getter | setter | property
+	program              -> ( statement | expression )*
 
-	expression -> addition | subtraction | division | multiplication
-	expression -> remainder | bit_or | bit_and | bit_xor | bitshift_left
-	expression -> bitshift_right | assign | plus_assign | minus_assign
-	expression -> times_assign | div_assign | rem_assign | bsleft_assign
-	expression -> bsright_assign | or_assign | and_assign | xor_assign
-	expression -> less_than | greater_than | less_eq_to | greater_eq_to
-	expression -> not_equal | equal | boolean_and | boolean_or
-	expression -> pre_increment | post_increment | pre_decrement
-	expression -> post_decrement | deference | reference | type_cast
-	expression -> array_expression | array_access_expr
-	expression -> inclusive_range_expr | exclusive_range_expr
-	expression -> tuple_expr | access_tuple | named_expr | temp_tuple_elem
-	expression -> if | for_loop | foreach | while | forever | do_while
-	expression -> switch | fn_call | new | delete
-	expression -> "(" expression ")"
+	term                 -> ";"
 
-	term       -> ";"
+	type                 -> tuple_type | array_type | pointer_type
+	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
+	type                 -> "int64" | "uint8" | "uint16" | "uint32"
+	type                 -> "uint64" | "float" | "double" | "var" | "void"
+	type                 -> identifier
 
-	var_decl       -> type variable_name ( "=" expression )?
+	identifier           -> "_"? ( alphas | "_" ) ( alphanumerics | "_" )*
+	identifier           -> "operator" operator
 
-	addition       -> expression "+" expression
-	subtraction    -> expression "-" expression
-	division       -> expression "/" expression
-	multiplication -> expression "*" expression
-	remainder      -> expression "%" expression
+	alphas               -> ( "A" ... "Z" | "a" ... "z" )
+	numerics             -> "0" ... "9"
+	alphanumerics        -> alphas | numerics
 
-	bit_or         -> expression "|" expression
-	bit_and        -> expression "&" expression
-	bit_xor        -> expression "^" expression
-	bitshift_left  -> expression "<<" expression
-	bitshift_right -> expression ">>" expression
+	block                -> "{" (statement | expression)* "}"
+	block                -> ":" (statement | expression)
 
-	assign         -> expression "=" expression
-	plus_assign    -> expression "+=" expression
-	minus_assign   -> expression "-=" expression
-	times_assign   -> expression "*=" expression
-	div_assign     -> expression "/=" expression
-	rem_assign     -> expression "%=" expression
-	bsleft_assign  -> expression "<<=" expression
-	bsright_assign -> expression ">>=" expression
-	or_assign      -> expression "|=" expression
-	and_assign     -> expression "&=" expression
-	xor_assign     -> expression "^=" expression
+	statement            -> var_decl term | expression term | class | block
+	statement            -> break_stmt term | continue_stmt term
+	statement            -> yield_stmt term | function | aggregate
+	statement            -> extern_fn term
+	statement            -> interface | destructor | namespace term
+	statement            -> import term
+	statement            -> getter | setter | property | enum
 
-	less_than      -> expression "<" expression
-	greater_than   -> expression ">" expression
-	less_eq_to     -> expression "<=" expression
-	greater_eq_to  -> expression ">=" expression
-	not_equal      -> expression "!=" expression
-	equal          -> expression "=" expression
-	boolean_and    -> expression "&&" expression
-	boolean_or     -> expression "||" expression
+	expression           -> binop_expr | unary_expr | value | control
+	expression           -> access_tuple | named_expr | temp_tuple_elem
+	expression           -> fn_call | new | delete | member_access | "this"
+	expression           -> "(" expression ")" |
 
-	pre_increment  -> "++" lvalue
-	post_increment -> lvalue "++"
-	pre_decrement  -> "--" lvalue
-	post_decrement -> lvalue "--"
-	deference      -> "*" lvalue
-	reference      -> "&" lvalue
+	value                -> array_expression | array_access_expr
+	value                -> inclusive_range_expr | exlusive_range_expr
+	value                -> tuple_expr
 
-	type_cast      -> "(" type ")" expression
+	control              -> if | for_loop | foreach | while | forever | do_while
+	control              -> switch
 
-	class          -> "class" identifier (":" super_list)?
-	super_list     -> identifier? | identififer ("," identifier)*
-	partial_class  -> "partial" class
+	binop_expr           -> addition | subtraction | division | multiplication
+	binop_expr           -> remainder | bit_or | bit_and | bit_xor
+	binop_expr           -> bitshift_left
+	binop_expr           -> bitshift_right | assign | plus_assign | minus_assign
+	binop_expr           -> times_assign | div_assign | rem_assign
+	binop_expr           -> bsleft_assign
+	binop_expr           -> bsright_assign | or_assign | and_assign | xor_assign
+	binop_expr           -> less_than | greater_than | less_eq_to
+	binop_expr           -> greater_eq_to
+	binop_expr           -> not_equal | equal | boolean_and | boolean_or
 
-    type                 -> array
+	unary_expr           -> pre_increment | post_increment | pre_decrement
+	unary_expr           -> post_decrement | deference | reference
+
+	var_decl             -> type variable_name ( "=" expression )?
+
+	addition             -> expression "+" expression
+	subtraction          -> expression "-" expression
+	division             -> expression "/" expression
+	multiplication       -> expression "*" expression
+	remainder            -> expression "%" expression
+
+	bit_or               -> expression "|" expression
+	bit_and              -> expression "&" expression
+	bit_xor              -> expression "^" expression
+	bitshift_left        -> expression "<<" expression
+	bitshift_right       -> expression ">>" expression
+
+	assign               -> expression "=" expression
+	plus_assign          -> expression "+=" expression
+	minus_assign         -> expression "-=" expression
+	times_assign         -> expression "*=" expression
+	div_assign           -> expression "/=" expression
+	rem_assign           -> expression "%=" expression
+	bsleft_assign        -> expression "<<=" expression
+	bsright_assign       -> expression ">>=" expression
+	or_assign            -> expression "|=" expression
+	and_assign           -> expression "&=" expression
+	xor_assign           -> expression "^=" expression
+
+	less_than            -> expression "<" expression
+	greater_than         -> expression ">" expression
+	less_eq_to           -> expression "<=" expression
+	greater_eq_to        -> expression ">=" expression
+	not_equal            -> expression "!=" expression
+	equal                -> expression "=" expression
+	boolean_and          -> expression "&&" expression
+	boolean_or           -> expression "||" expression
+
+	pre_increment        -> "++" expression
+	post_increment       -> expression "++"
+	pre_decrement        -> "--" expression
+	post_decrement       -> expression "--"
+	deference            -> "*" expression
+	reference            -> "&" expression
+
+	type_cast            -> "(" type ")" expression
+
+	enum                 -> privacy "enum" identifier "{" enum_values "}"
+	enum_values          -> enum_value? | enum_value ("," enum_value)*
+	enum_value           -> identifier ( "(" param_list ")" )?
+	enum_access          -> identifier "." identifier
+	enum_pattern         -> member_access "(" arg_list ")"
+
+	class                -> privacy "class" identifier (":" super_list)?
+	super_list           -> identifier? | identififer ("," identifier)*
+	partial_class        -> "partial" class
+	member_access        -> identifier "." identifier
+
 	array_type           -> data_type "[" expression "]"
-
 	array_expression     -> "[" arr_elements "]"
 	arr_elements         -> arr_single_element | arr_mult_elements
 	arr_single_element   -> expression?
@@ -87,72 +122,64 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	inclusive_range_expr -> "[" expression "..." expression "]"
 	exclusive_range_expr -> "[" expression ".." expression "]"
 
-	tuple_type   -> "(" type ("," type )* ")"
-	tuple_expr   -> "(" tuple_value ("," tuple_value )* ","? " ")"
-	tuple_value  -> expression
-	access_tuple -> tuple_expr "." (0 ... infinity)
+	tuple_type           -> "(" type ("," type )* ")"
+	tuple_expr           -> "(" tuple_value ("," tuple_value )* ","? " ")"
+	tuple_value          -> expression
+	access_tuple         -> tuple_expr "." (0 ... infinity)
+	tuple_value          -> named_expr
 
-	type        -> tuple_type
+	named_expr           -> name ":" expression
 
-	tuple_value -> named_expr
-	named_expr  -> name ":" expression
+	temp_tuple_elem      -> "_"
 
-	var_decl        -> tuple_type "(" name ("," name)* ","? ")"
-	temp_tuple_elem -> "_"
+	if                   -> "if" "(" expression ")" (elif | else)? block
+	elif                 -> "elif" "(" expression ")" (elif | else)? block
+	else                 -> "else" block
 
-	block     -> "{" (statement | expression)* "}"
-	block     -> ":" (statement | expression)
+	for_loop             -> "for" "(" exprression ";" expression ";"
+	                        expression ")" block
+	foreach              -> "foreach" "(" var_decl "in" expression ")" block
+	while                -> "while" "(" expression ")" block
+	forever              -> "forever" block
+	do_while             -> "do" block "while" "(" expression ")"
 
-	if         -> "if" "(" expression ")" (elif | else)? block
-	elif       -> "elif" "(" expression ")" (elif | else)? block
-	else       -> "else" block
+	switch               -> "switch" "(" expression ")" switch_block
+	switch_block         -> "{" switch_match ("," switch_match)* "}"
+    switch_match         -> switch_pattern "," switch_pattern "=>" switch_value
+    switch_value         -> expression | "{" ( statement | expression )* "}"
+    switch_pattern       -> ("_" | expression ) | enum_pattern
 
-	for_loop  -> "for" "(" exprression ";" expression ";" expression
-	             ")" block
+	break_stmt           -> "break"
+	continue_stmt        -> "continue"
+	yield_stmt           -> "yield" expression
 
-	foreach    -> "foreach" "(" var_decl "in" expression ")" block
+    function             -> privacy "def" fn_name? "(" param_list ")"
+	                        ("->" type)? block
+    extern_fn            -> privacy "extern" "def" fn_name "(" param_list ")"
+	                        "->" type
+    param_list           -> var_decl? | var_decl ("," var_decl)*
 
-	while      -> "while" "(" expression ")" block
+    fn_call              -> expression "(" arg_list ")"
+    arg_list             -> arg? | arg ("," arg)*
+    arg                  -> expression | named_expr
 
-	forever    -> "forever" block
+    aggregate            -> "aggregate" block
 
-	do_while   -> "do" block "while" "(" expression ")"
+	interface            -> "interface" identifier block
 
-	break_stmt    -> "break"
-	continue_stmt -> "continue"
+	constructor          -> identifier "(" param_list ")" block
+	destructor           -> "~" identifier "(" ")" block
 
-	switch         -> "switch" "(" expression ")" switch_block
-	switch_block   -> "{" switch_match ("," switch_match)* "}"
-    switch_match   -> switch_pattern "," switch_pattern "=>" switch_value
-    switch_value   -> expression | "{" ( statement | expression )* "}"
-    switch_pattern -> ("_" | expression )
+	namespace            -> "namespace" identifier block?
+	import               -> "import" identifier
 
-	yield_stmt -> "yield" expression
+	new                  -> "new" identifier
+	delete               -> "delete" expression
+	pointer_type         -> type "*"
 
-    function   -> "def" fn_name? "(" param_list ")" ("->" type)? block
-    param_list -> var_decl? | var_decl ("," var_decl)*
+	privacy              -> "private" | "protected" | "public"
 
-    fn_call    -> expression "(" arg_list ")"
-    arg_list   -> arg? | arg ("," arg)*
-    arg        -> expression | named_expr
+	getter               -> "get" block
+	setter               -> "set" block
 
-    aggregate -> "aggregate" block
-
-    extern_fn -> "extern" "def" fn_name "(" param_list ")" "->" type
-	interface -> "interface" identifier block
-
-	destructor -> "~" identifier "(" ")" block
-	identifier -> "operator" operator
-
-	namespace -> "namespace" identifier block?
-	import    -> "import" identifier
-
-	new        -> "new" identifier
-	delete     -> "delete" expression
-
-	privacy_level -> "private" | "protected" | "public"
-
-	getter    -> "get" block
-	setter    -> "set" block
-
-	property  -> type identifier block
+	property             -> privacy type identifier block

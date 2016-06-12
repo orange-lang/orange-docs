@@ -3,8 +3,10 @@
 	class         -> "class" identifier (":" super_list)?
 	super_list    -> identifier? | identififer ("," identifier)*
 	partial_class -> "partial" class
+	member_access -> identifier "." identifier
 
-	statement     -> class 
+	statement     -> class
+	expression    -> member_access
 
 A class is essentially a named tuple that supports methods. An example class called `Animal` is defined below.
 
