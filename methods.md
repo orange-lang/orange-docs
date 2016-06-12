@@ -21,6 +21,7 @@ Inside a class method, a special variable called `this` is defined. `this` refer
 ## Constructors and Destructors
 
 	destructor -> "~" identifier "(" ")" block
+    statement  -> destructor
 
 Constructors can be used to couple custom initialization code for a class. Destructors are like constructors, but execute when the class instance is deleted.
 

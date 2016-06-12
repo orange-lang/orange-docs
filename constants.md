@@ -2,16 +2,16 @@
 
 Orange has three types of constants: floating-point, integral, and strings.
 
-
-	value -> ( "0" ... "9" | "A" ... "F" )+
+	value      -> ( "0" ... "9" | "A" ... "F" )+
+	expression -> integral_const | float_const | string_const
 
 	integral_const -> iprefix? value isuffix?
-	iprefix -> "0b" | "0o" | "0x"
-	isuffix -> "i" | "u" | "i8" | "i16" | "i32" | "i64"
-	isuffix -> "u8" | "u16" | "u32" | "u64"
+	iprefix        -> "0b" | "0o" | "0x"
+	isuffix        -> "i" | "u" | "i8" | "i16" | "i32" | "i64"
+	isuffix        -> "u8" | "u16" | "u32" | "u64"
 
 	float_const -> value ( "." value )? fsuffix?
-	fsuffix -> "f" | "d"
+	fsuffix     -> "f" | "d"
 
 	string_const -> "\"" string_content "\""
 
@@ -30,7 +30,7 @@ The integral suffix determine the size and sign of the constant:
 - `i64`: 64-bit signed integer
 - `u64`: 64-bit unsigned integer
 
-The size of `i` and `u` is either 32- or 64-bits depending on the system you're compiling on. If the suffix is ommited, `i` is inferred. 
+The size of `i` and `u` is either 32- or 64-bits depending on the system you're compiling on. If the suffix is ommited, `i` is inferred.
 
 Floating-point constants are simpler; they don't support prefixes and only have two suffixes:
 

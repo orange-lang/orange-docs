@@ -1,6 +1,7 @@
 # Type Casting
 
-	expression -> "(" type ")" expression
+	type_cast  -> "(" type ")" expression
+	expression -> type_cast 
 
 A type may be casted to another valid type by prefixing the expression to cast with the target type name in parenthesis. For example, `(int)5.3` casts 5.3 as an integer (`5`).
 

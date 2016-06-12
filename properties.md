@@ -1,7 +1,11 @@
 # Properties
 
-	getter -> "get" block
-	setter -> "set" block
+	getter    -> "get" block
+	setter    -> "set" block
+
+	property  -> type identifier block
+
+	statement -> getter | setter | property
 
 Properties are methods that are used like regular members. They can be defined in interfaces, and can indicate whether or not they provide a getter and a setter. Going back to our `Pet` example, we can replace the `getName` with a property:
 

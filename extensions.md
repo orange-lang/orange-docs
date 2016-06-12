@@ -1,6 +1,8 @@
 # Extensions
 
-	extension -> "extend" identifier (":" super_list)?
+	extension -> "extend" identifier (":" super_list)? block
+	statement -> extension
+
 
 Existing classes can have their functionality extended with new behavior via Extensions. Extensions can declare a list of interfaces in their super list,
 but not another class.

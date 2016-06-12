@@ -3,6 +3,8 @@
     function   -> "def" fn_name? "(" param_list ")" ("->" type)? block
     param_list -> var_decl? | var_decl ("," var_decl)*
 
+    statement  -> function
+
 Functions are anonymous or named expressions that can be called at any point to execute code. The parameters in function signatures work like normal variable declarations, so they can be given initial values and ommited from an argument list upon calling the function.
 
 Note that if a function parameter is declared with an initial value, then all parameters after it must also have an initial value.
@@ -27,9 +29,11 @@ The body of a function can define other functions, if so desired.
 
 ## Calling functions
 
-    fn_call  -> expression "(" arg_list ")"
-    arg_list -> arg? | arg ("," arg)*
-    arg      -> expression | named_expr
+    fn_call    -> expression "(" arg_list ")"
+    arg_list   -> arg? | arg ("," arg)*
+    arg        -> expression | named_expr
+
+    expression -> fn_call
 
 Functions can be called by placing the name of the function to call before parenthesis that contain the function arguments. Our `subtract` from the previous example can be called by using `subtract(9, 5)` as an expression.
 
@@ -51,6 +55,7 @@ An anonymous function can be constructed simply by ommitting its function name. 
 ## Aggregate functions
 
     aggregate -> "aggregate" block
+    statement -> aggregate
 
 Common code for functions can be shared using an aggregate definition:
 
@@ -104,6 +109,7 @@ Note that although aggregate blocks support the one-line block syntax, it's poin
 ## Calling C functions
 
     extern_fn -> "extern" "def" fn_name "(" param_list ")" "->" type
+    statement -> extern_fn term
 
 An external C function can be declared by prefixing the `def` with `extern`. Note that there are some limitations to this:
 
@@ -113,5 +119,5 @@ An external C function can be declared by prefixing the `def` with `extern`. Not
 
 For example, if we wanted to call `printf`:
 
-    extern def printf(char* s, ...) -> int32
+    extern def printf(char* s, ...) -> int32;
     printf("Hello, world! The year is %d\n", 2016);

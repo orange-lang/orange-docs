@@ -1,7 +1,9 @@
 # Pointers
 
-	new -> "new" identifier
-	delete -> "delete" expression
+	new        -> "new" identifier
+	delete     -> "delete" expression
+
+	expression -> new | delete
 
 In Orange, pointers can be used to refer to a memory location where a value of a specific type is stored. For example, `int*` refers to a memory location where an int is stored.
 

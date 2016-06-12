@@ -4,14 +4,15 @@ Orange provides control blocks that can optionally execute code if a condition i
 
 ## if
 
-	statement -> expression ";"
 	statement -> block
 	block     -> "{" (statement | expression)* "}"
 	block     -> ":" (statement | expression)
 
-	if    -> "if" "(" expression ")" (elif | else)? block
-	elif  -> "elif" "(" expression ")" (elif | else)? block
-	else  -> "else" block
+	if         -> "if" "(" expression ")" (elif | else)? block
+	elif       -> "elif" "(" expression ")" (elif | else)? block
+	else       -> "else" block
+
+	expression -> if
 
 `if` is the most basic control block. It has a condition, and if it is met, the code for that block is executed once.
 
@@ -50,8 +51,10 @@ This single-expression block can be used anywhere a block is allowed, including 
 
 ## for
 
-	expr -> expression
-	for_loop -> "for" "(" expr ";" expr ";" expr ")" block
+	for_loop  -> "for" "(" exprression ";" expression ";" expression
+	             ")" block
+
+	expression -> for_loop
 
 For loops can be used to run code continously until a condition is met.
 
@@ -68,6 +71,9 @@ An example of looping through all numbers 1 to 10 to sum them is as follows:
 
 ## foreach
 
+	foreach    -> "foreach" "(" var_decl "in" expression ")" block
+	expression -> foreach
+
 `foreach` can be used to iterate over an object that implements `Iterable` or for an object that an iterator can be created for. See [Interfaces](interfaces.md) for more details.
 
     int sum = 0;
@@ -81,7 +87,8 @@ Unlike arrays, tuples cannot be iterated over, as each element can have a differ
 
 ## while
 
-	while -> "while" "(" expression ")" block
+	while      -> "while" "(" expression ")" block
+	expression -> while
 
 A while loop is a simplified for loop that doesn't have the `initializer` or `afterthought`:
 
@@ -91,7 +98,8 @@ A while loop is a simplified for loop that doesn't have the `initializer` or `af
 
 ## forever
 
-	forever -> "forever" block
+	forever    -> "forever" block
+	expression -> forever
 
 A forever loop is the simplest loop that has no condition and after executing the block, will loop back to the beginning infinitely until broken.
 
@@ -101,7 +109,8 @@ A forever loop is the simplest loop that has no condition and after executing th
 
 ## do while
 
-	do_while -> "do" block "while" "(" expression ")"
+	do_while   -> "do" block "while" "(" expression ")"
+	expression -> do_while
 
 Do while is like a while loop where the code block is executed before the condition is checked. After the block is executed, if the condition fails, the loop will no longer continue.
 
@@ -111,7 +120,9 @@ Do while is like a while loop where the code block is executed before the condit
 
 ## Loop control
 
-	statement -> "break" ";" | "continue" ";"
+	break_stmt    -> "break"
+	continue_stmt -> "continue"
+	statement     -> break_stmt term | continue_stmt term
 
 Loops can have their blocks controlled by using `continue` or `break` statements (which can have values, see Blocks as values for more details). A continue statement will continue to the next iteration. `continue` will skip to the afterthought, if one exists. If an afterthought doesn't exist, it'll skip to the condition, if one exists for that loop. If a condition doesn't exist, it will skip to the top of the body of the loop. `break` will always exit the loop, and executes neither `afterthought` nor `condition`.
 
@@ -122,6 +133,8 @@ Loops can have their blocks controlled by using `continue` or `break` statements
     switch_match   -> switch_pattern "," switch_pattern "=>" switch_value
     switch_value   -> expression | "{" ( statement | expression )* "}"
     switch_pattern -> ("_" | expression )
+
+	expression     -> switch
 
 `switch` is similar to using `if` and `elif`, but allows for more power, since it does pattern matching.
 
@@ -174,7 +187,8 @@ Enums can also be used for pattern matching. See Enumerations for more details.
 
 ## Blocks as values
 
-    statement -> "yield" expression ";"
+	yield_stmt -> "yield" expression
+	statement  -> yield_stmt term
 
 Any control block can be used as a value, if it would produce a value in all scenarios. For example, an if block can be used as a value if it has an else, and all if blocks `yield` some value.
 

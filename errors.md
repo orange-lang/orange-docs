@@ -3,7 +3,9 @@
 	try_block     -> "try" block catch_block+ finally_block?
 	catch_block   -> "catch" "(" var_decl ")" block
 	finally_block -> "finally" block
-	statement     -> "throw" expression ";"
+	throw_stmt    -> "throw" expression ";"
+
+	statement     -> try_block | catch_block | finally_block | throw_stmt
 
 Orange offers exception support to implement error handling. An object of any type (including plain data types such as `int` or `float`) may be thrown as an exception.
 

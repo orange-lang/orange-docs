@@ -1,6 +1,7 @@
 # Interfaces
 
 	interface -> "interface" identifier block
+	statement -> interface 
 
 Interfaces are memberless classes that declare (but not define) methods. Certain classes will _implement_ these interfaces, which means any method defined in an interface will be valid to use on a class.
 

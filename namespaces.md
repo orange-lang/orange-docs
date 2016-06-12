@@ -1,8 +1,9 @@
 # Namespaces &amp; Packages
 
-	statement -> "namespace" identifier ";"
-	statement -> "namespace" identifier block
-	statement -> "import" identifier ";"
+	namespace -> "namespace" identifier block?
+	import    -> "import" identifier
+
+	statement -> namespace term | import term
 
 In Orange, code may be oragnized into a hierarchy of different packages and namespaces. By convention, the namespace of a file will be its path inside a project directory. For example, if a file is in `Main/util`, its namespace would be `Main.util`.
 

@@ -4,6 +4,8 @@
 	super_list    -> identifier? | identififer ("," identifier)*
 	partial_class -> "partial" class
 
+	statement     -> class 
+
 A class is essentially a named tuple that supports methods. An example class called `Animal` is defined below.
 
     enum Species {

@@ -8,6 +8,8 @@
 	pattern      -> enum_pattern
 	enum_pattern -> identifier "." identifier "(" arg_list ")"
 
+	statement    -> enum
+
 In Orange, an enumeration is a list of named values which may contain values themselves.
 
     enum Status {
