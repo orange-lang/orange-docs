@@ -1,1 +1,2 @@
-[] Type and function attributes
+- Type and function attributes
+- Nullable types
