@@ -34,7 +34,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	expression           -> binop_expr | unary_expr | value | control
 	expression           -> access_tuple | named_expr | temp_tuple_elem
 	expression           -> fn_call | new | delete | member_access | "this"
-	expression           -> "(" expression ")" | %epsilon
+	expression           -> "(" expression ")" | ternary | %epsilon
 
 	value                -> array_expression | array_access_expr
 	value                -> inclusive_range_expr | exlusive_range_expr
@@ -136,6 +136,8 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	if                   -> "if" "(" expression ")" (elif | else)? block
 	elif                 -> "elif" "(" expression ")" (elif | else)? block
 	else                 -> "else" block
+
+	ternary              -> "(" expression ")" "?" expression ":" expression
 
 	for_loop             -> "for" "(" exprression ";" expression ";"
 	                        expression ")" block

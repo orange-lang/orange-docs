@@ -50,6 +50,15 @@ Note that blocks normally begin with `{` and end with `}`, but Orange allows rep
 
 This single-expression block can be used anywhere a block is allowed, including functions.
 
+## ternary operator
+
+	expression -> ternary
+	ternary    -> "(" expression ")" "?" expression ":" expression
+
+The ternary operator is a single-line if-else block that returns a value.
+
+	var biggerNumber = (a > b) ? a : b
+
 ## for
 
 	for_loop  -> "for" "(" exprression ";" expression ";" expression

@@ -56,6 +56,7 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	BIT_OR             -> "|"
 	BIT_AND            -> "&"
 	BIT_XOR            -> "^"
+	QUESTION           -> "?"
 	SHIFT_LEFT         -> "<<"
 	SHIFT_RIGHT        -> ">>"
 	ASSIGN             -> "="
