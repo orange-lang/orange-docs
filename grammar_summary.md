@@ -20,7 +20,6 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	numerics             -> "0" ... "9"
 	alphanumerics        -> alphas | numerics
 
-
 	long_block           -> "{" statements? "}"
 	short_block          -> ":" statement
 	block                -> long_block | short_block
