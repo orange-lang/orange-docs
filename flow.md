@@ -4,10 +4,11 @@ Orange provides control blocks that can optionally execute code if a condition i
 
 ## if
 
-	statements -> statement (TERM statement)*
-	statement  -> block
-	block      -> "{" statements? "}"
-	block      -> ":" statement
+	statements  -> statement (TERM statement)*
+	statement   -> long_block
+	long_block  -> "{" statements? "}"
+	short_block -> ":" statement
+	block       -> long_block | short_block
 
 	if         -> "if" "(" expression ")" (elif | else)? block
 	elif       -> "elif" "(" expression ")" (elif | else)? block

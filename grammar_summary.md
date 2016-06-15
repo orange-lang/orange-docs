@@ -20,10 +20,12 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	numerics             -> "0" ... "9"
 	alphanumerics        -> alphas | numerics
 
-	block                -> "{" statements? "}"
-	block                -> ":" statement
 
-	statement            -> var_decl | expression | class | block
+	long_block           -> "{" statements? "}"
+	short_block          -> ":" statement
+	block                -> long_block | short_block
+
+	statement            -> var_decl | expression | class | long_block
 	statement            -> break_stmt | continue_stmt
 	statement            -> yield_stmt | function | aggregate
 	statement            -> extern_fn
