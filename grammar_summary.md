@@ -2,7 +2,8 @@
 
 This is a compilation of the various bits of grammar defined throughout this documentation.
 
-	program              -> statement*
+	program              -> statements?
+	statements           -> statement (TERM statement)*
 
 	term                 -> ";" | "\n"
 
@@ -19,21 +20,21 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	numerics             -> "0" ... "9"
 	alphanumerics        -> alphas | numerics
 
-	block                -> "{" (statement | expression)* "}"
-	block                -> ":" (statement | expression)
+	block                -> "{" statements? "}"
+	block                -> ":" statement
 
-	statement            -> var_decl term | expression term | class | block
-	statement            -> break_stmt term | continue_stmt term
-	statement            -> yield_stmt term | function | aggregate
-	statement            -> extern_fn term
-	statement            -> interface | destructor | namespace term
-	statement            -> import term
-	statement            -> getter | setter | property | enum | expression term
+	statement            -> var_decl | expression | class | block
+	statement            -> break_stmt | continue_stmt
+	statement            -> yield_stmt | function | aggregate
+	statement            -> extern_fn
+	statement            -> interface | destructor | namespace
+	statement            -> import
+	statement            -> getter | setter | property | enum | expression
 
 	expression           -> binop_expr | unary_expr | value | control
 	expression           -> access_tuple | named_expr | temp_tuple_elem
 	expression           -> fn_call | new | delete | member_access | "this"
-	expression           -> "(" expression ")" |
+	expression           -> "(" expression ")" | %epsilon
 
 	value                -> array_expression | array_access_expr
 	value                -> inclusive_range_expr | exlusive_range_expr

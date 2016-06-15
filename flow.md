@@ -4,9 +4,10 @@ Orange provides control blocks that can optionally execute code if a condition i
 
 ## if
 
-	statement -> block
-	block     -> "{" (statement | expression)* "}"
-	block     -> ":" (statement | expression)
+	statements -> statement (TERM statement)*
+	statement  -> block
+	block      -> "{" statements? "}"
+	block      -> ":" statement
 
 	if         -> "if" "(" expression ")" (elif | else)? block
 	elif       -> "elif" "(" expression ")" (elif | else)? block
@@ -122,7 +123,7 @@ Do while is like a while loop where the code block is executed before the condit
 
 	break_stmt    -> "break"
 	continue_stmt -> "continue"
-	statement     -> break_stmt term | continue_stmt term
+	statement     -> break_stmt | continue_stmt
 
 Loops can have their blocks controlled by using `continue` or `break` statements (which can have values, see Blocks as values for more details). A continue statement will continue to the next iteration. `continue` will skip to the afterthought, if one exists. If an afterthought doesn't exist, it'll skip to the condition, if one exists for that loop. If a condition doesn't exist, it will skip to the top of the body of the loop. `break` will always exit the loop, and executes neither `afterthought` nor `condition`.
 
@@ -188,7 +189,7 @@ Enums can also be used for pattern matching. See Enumerations for more details.
 ## Blocks as values
 
 	yield_stmt -> "yield" expression
-	statement  -> yield_stmt term
+	statement  -> yield_stmt
 
 If statements and switch blocks can be used as a value, if it would produce a value in all scenarios. For example, an if block can be used as a value if it has an else, and all if blocks `yield` some value.
 

@@ -113,7 +113,7 @@ Note that although aggregate blocks support the one-line block syntax, it's poin
 ## Calling C functions
 
     extern_fn -> "extern" "def" fn_name "(" param_list ")" "->" type
-    statement -> extern_fn term
+    statement -> extern_fn 
 
 An external C function can be declared by prefixing the `def` with `extern`. Note that there are some limitations to this:
 

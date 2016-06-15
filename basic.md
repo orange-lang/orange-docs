@@ -3,7 +3,7 @@
 Orange provides your common basic mathematical operations to use between values:
 
 	term           -> "\n" | ";"
-	statement      -> expression term
+	statement      -> expression
 
 	addition       -> expression "+" expression
 	subtraction    -> expression "-" expression
@@ -31,7 +31,7 @@ These operations equate to _expressions_, which are statements with values.
 
 ## Variables
 
-	statement -> var_decl term
+	statement -> var_decl 
 	var_decl  -> type variable_name ( "=" expression )?
 
 In Orange, variables are mutable named values. They can be made immutable if their type is `const data_type`.
