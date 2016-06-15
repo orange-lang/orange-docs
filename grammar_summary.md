@@ -6,7 +6,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	term                 -> ";" | "\n"
 
-	type                 -> tuple_type | array_type | pointer_type
+	type                 -> tuple_type | array_type | pointer_type | func_type
 	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
 	type                 -> "int64" | "uint8" | "uint16" | "uint32"
 	type                 -> "uint64" | "float" | "double" | "var" | "void"
@@ -152,6 +152,9 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	break_stmt           -> "break"
 	continue_stmt        -> "continue"
 	yield_stmt           -> "yield" expression
+
+    func_type            -> "(" type_list? ")" "->" type
+    type_list            -> type (COMMA type)*
 
     function             -> privacy "def" fn_name? "(" param_list ")"
 	                        ("->" type)? block

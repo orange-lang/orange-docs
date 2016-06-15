@@ -1,8 +1,8 @@
 # Functions
 
     function   -> "def" fn_name? "(" param_list ")" ("->" type)? block
-    type       -> func_ty
-    func_ty    -> "(" type_list? ")" "->" type
+    type       -> func_type
+    func_type  -> "(" type_list? ")" "->" type
     param_list -> var_decl? | var_decl ("," var_decl)*
 
     type_list  -> type (COMMA type)*
