@@ -146,7 +146,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	switch               -> "switch" "(" expression ")" switch_block
 	switch_block         -> "{" switch_match ("," switch_match)* "}"
-    switch_match         -> switch_pattern "," switch_pattern "=>" switch_value
+    switch_match         -> switch_pattern "," switch_pattern ":" switch_value
     switch_value         -> expression | "{" ( statement | expression )* "}"
     switch_pattern       -> ("_" | expression ) | enum_pattern
 

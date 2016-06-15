@@ -131,7 +131,7 @@ Loops can have their blocks controlled by using `continue` or `break` statements
 
 	switch         -> "switch" "(" expression ")" switch_block
 	switch_block   -> "{" switch_match ("," switch_match)* "}"
-    switch_match   -> switch_pattern "," switch_pattern "=>" switch_value
+    switch_match   -> switch_pattern "," switch_pattern ":" switch_value
     switch_value   -> expression | "{" ( statement | expression )* "}"
     switch_pattern -> ("_" | expression )
 
@@ -142,8 +142,8 @@ Loops can have their blocks controlled by using `continue` or `break` statements
 The syntax is as follows:
 
     switch expression {
-        pattern => statement,
-        pattern => statement,
+        pattern: statement,
+        pattern: statement,
         ...
         _: statement
     }
@@ -152,9 +152,9 @@ In a switch statement, you can have as many patterns as you wish, and `_` can be
 
     var x = 0
     switch x {
-       0 => "zero",
-       1 => "one",
-       _ => "neither zero nor one"
+       0: "zero",
+       1: "one",
+       _: "neither zero nor one"
     }
 
 In this case, the result is `"zero"`.
@@ -162,10 +162,10 @@ In this case, the result is `"zero"`.
 A pattern can also be matched against a decoupled tuple:
 
     switch ("dog", 2016) {
-       ("dog", 2015) => "2015 dogs is a lot of dogs",
-       ("cat", 1994) => "1994 cats is less than 2015 dogs",
-       ("bird", number) => "we have a bird and some number",
-       (animal, _) => animal
+       ("dog", 2015): "2015 dogs is a lot of dogs",
+       ("cat", 1994): "1994 cats is less than 2015 dogs",
+       ("bird", number): "we have a bird and some number",
+       (animal, _): animal
     }
 
 In this example, we excluded `_` from the switch list, since that last pattern, `(animal, _)` will bind to any value. Any variable declared in the pattern of a switch statement will shadow existing variables with that same name.
@@ -174,13 +174,13 @@ Multiple patterns can be used with commas:
 
     var x = 0
     switch (x) {
-        0, 1 => "zero or one",
-        _ => "neither zero nor one"
+        0, 1: "zero or one",
+        _: "neither zero nor one"
     }
 
 The statement for a pattern in a switch statement can be a block of code, if so desired.
 
-    pattern => {
+    pattern: {
         // lots of code
     }
 

@@ -101,7 +101,6 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	FOREVER            -> "forever"
 	DO                 -> "do"
 	SWITCH             -> "switch"
-	LARGE_ARROW        -> "=>"
 	BREAK              -> "break"
 	CONTINUE           -> "continue"
 	YIELD              -> "yield"
