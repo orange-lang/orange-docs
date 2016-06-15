@@ -22,4 +22,6 @@
   * [Nested Types](nested_types.md)
   * [Namespaces &amp; packages](namespaces.md)
   * [Generics](generics.md)
-  * [Grammar Summary](grammar.md)
+  * [Grammar Summary](grammar_summary.md)
+* [Compiler](compiler.md)
+  * [Lexer Tokens](lexer.md)

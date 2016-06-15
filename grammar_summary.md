@@ -2,9 +2,9 @@
 
 This is a compilation of the various bits of grammar defined throughout this documentation.
 
-	program              -> ( statement | expression )*
+	program              -> statement*
 
-	term                 -> ";"
+	term                 -> ";" | "\n"
 
 	type                 -> tuple_type | array_type | pointer_type
 	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
@@ -28,7 +28,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	statement            -> extern_fn term
 	statement            -> interface | destructor | namespace term
 	statement            -> import term
-	statement            -> getter | setter | property | enum
+	statement            -> getter | setter | property | enum | expression term
 
 	expression           -> binop_expr | unary_expr | value | control
 	expression           -> access_tuple | named_expr | temp_tuple_elem
