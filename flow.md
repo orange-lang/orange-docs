@@ -213,5 +213,13 @@ Yield must be declared explicitly, except in the case of one-line blocks. One-li
 	var a = if (5 > 10): 0
 	        else: 1
 
-
 If a block is used as a value, all of yield statements must have the same data type. Note, however, that implicit yield statements are unchecked unless the block's value is being used.
+
+Aside from if and switch blocks, yield can be explicitly defined in just a
+regular nested block.
+
+	var a = {
+		var aNumber = 0
+		// do some things to aNumber
+		yield aNumber
+	}
