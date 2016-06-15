@@ -1,7 +1,7 @@
 # Interfaces
 
 	interface -> "interface" identifier block
-	statement -> interface 
+	statement -> interface
 
 Interfaces are memberless classes that declare (but not define) methods. Certain classes will _implement_ these interfaces, which means any method defined in an interface will be valid to use on a class.
 
@@ -12,7 +12,7 @@ Interfaces are memberless classes that declare (but not define) methods. Certain
 For example:
 
     interface Talker {
-       def saySomething() -> string;
+       def saySomething() -> string
     }
 
 Methods in an interface _must_ have a return value, since it cannot be inferred from some implementation's body.

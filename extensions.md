@@ -17,6 +17,6 @@ Extensions operate on existing non-`final` classes, and allow you to define an i
         public def bark() { /* more code */ }
     }
 
-    var dog = Dog();
-    dog.sleep();
-    dog.bark();
+    var dog = Dog()
+    dog.sleep()
+    dog.bark()

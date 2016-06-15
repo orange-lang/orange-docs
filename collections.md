@@ -16,18 +16,18 @@ A list of values in Orange can be created by appending an array-specifier to the
 
 Assigning an initial list of values to an array variable is also done using the square-bracket syntax:
 
-    int[5] myList = [0, 1, 2, 3, 4];
+    int[5] myList = [0, 1, 2, 3, 4]
     // or
-    var myList = [0, 1, 2, 3, 4];
-	var emptyList = [];
-	var listOneElement = [5.3f];
+    var myList = [0, 1, 2, 3, 4]
+	var emptyList = []
+	var listOneElement = [5.3f]
 
 When you want to access an individual element of the array, you return once again to the square-bracket syntax:
 
-    myList[0]; // first element in myList
-    myList[n]; // nth element in myList
+    myList[0] // first element in myList
+    myList[n] // nth element in myList
 
-The size of an array can be omitted if it is given an initial value, or if it is a parameter to a function. That is to say, `int[] myList;` is not valid but `int[] myList = [0,1,2];` is.
+The size of an array can be omitted if it is given an initial value, or if it is a parameter to a function. That is to say, `int[] myList` is not valid but `int[] myList = [0,1,2]` is.
 
 Note that all elements of an array must have valid types upon declaration and assigning new values. Some types will be automatically up-casted. See [Type Casting](casting.md).
 
@@ -56,7 +56,7 @@ It is important to note that using an array range will actually create the array
 
 A tuple is a collection of a set of values whose components may be different types. They are created by grouping values with parenthesis: `(a, b, c)`. A tuples size is not limited, but cannot be increased at runtime. Accessing members of a tuple is done using the `.` syntax:
 
-    (string, int) tuple = ("dog", 2016);
+    (string, int) tuple = ("dog", 2016)
     // tuple.0 == "dog"
     // tuple.1 == 2016
 
@@ -70,7 +70,7 @@ A tuple of a single element must have a trailing comma: `(a,)`. This is to avoid
 
 Tuples may have named elements, which can be used as substitute for using offsets to access tuple members:
 
-    var tuple = (animal: "dog", year: 2016);
+    var tuple = (animal: "dog", year: 2016)
     // tuple.animal == tuple.0 == "dog"
     // tuple.year == tuple.1 == 2016
 
@@ -83,16 +83,16 @@ Tuples may have named elements, which can be used as substitute for using offset
 
 Tuples, like variables, are also lvalues. They can appear on the lefthand side of an assignment operation. Note that when used as an lvalue, each of the tuples components must also be lvalues. Using them as lvalues will deconstruct the tuple:
 
-    var (a, b) = (1, 2); // a == 1, b == 2
-    (a, b) += (5, 25); // a += 5, b += 25
+    var (a, b) = (1, 2) // a == 1, b == 2
+    (a, b) += (5, 25) // a += 5, b += 25
 
 When a tuple is deconstructed, `_` can be used as a throwaway value.
 
-    var (_, year) = ("dog", 2016); // only assign 2016 to year, ignore "dog"
+    var (_, year) = ("dog", 2016) // only assign 2016 to year, ignore "dog"
 
 Using tuples stored into a variable can also be used as an lvalue:
 
- 	var rover = (name: "Rover", age: 4);
-	rover += (_, 1);
+ 	var rover = (name: "Rover", age: 4)
+	rover += (_, 1)
 	// rover.name == "Rover"
 	// rover.age == 5

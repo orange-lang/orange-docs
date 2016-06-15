@@ -2,7 +2,7 @@
 
 Orange provides your common basic mathematical operations to use between values:
 
-	term           -> ";"
+	term           -> "\n" | ";"
 	statement      -> expression term
 
 	addition       -> expression "+" expression
@@ -26,9 +26,8 @@ Orange also gives you basic bitwise operators:
 	expression     -> bit_or | bit_and | bit_xor | bitshift_left
 	expression     -> bitshift_right
 
-These operations equate to _expressions_, which are statements with values. A regular non-expression statement ends in a semicolon.
+These operations equate to _expressions_, which are statements with values.
 
-For example, `5 + 3` is an expression with the value of `8`, whereas `5 + 3;` is a statement that evaluated to `8`, but has no referencable value. Note that this doesn't mean code like `a = 5 + 3;` won't work, since that evaluates to `(a = (5 + 3));`.
 
 ## Variables
 
@@ -57,21 +56,21 @@ Variables are a type of `lvalue`, which means that they are valid on the left-ha
 
 Some example of creating variables are:
 
-    int aNumber = 953;
-    float some_float = 53.2;
-    uint32 aHexNum = 0xDEADBEEFu32;
-	var a_variable = 0b1111000011111u16;
+    int aNumber = 953
+    float some_float = 53.2
+    uint32 aHexNum = 0xDEADBEEFu32
+	var a_variable = 0b1111000011111u16
 
 If a variable in Orange is given an initial value, the typename may be omitted and replaced with `var`.
 
-Using the previous example, `var aNumber = 953;` is valid but `var aNumber;` is not, since the latter does not have an initial value, and Orange can't determine the type of aNumber.
+Using the previous example, `var aNumber = 953` is valid but `var aNumber` is not, since the latter does not have an initial value, and Orange can't determine the type of aNumber.
 
 ### Shadowing Variables
 
 A variable can be redefined with a new type at any point:
 
-    int myVariable = 3;
-    float myVariable = 2.1;
+    int myVariable = 3
+    float myVariable = 2.1
     // any reference to myVariable now uses the redefined float
 
 Unlike the C-family of languages, shadowing variables is perfectly valid in the original scope that the shadowed variable is declared.
@@ -117,8 +116,8 @@ For more information on deference and reference, see [Pointers](pointers.md).
 
 Orange supports interpreting expressions inside of a string if a sequence of `${expression}` is found. The expression will be evaluated and concatenated in the proper place to the string at runtime.
 
-    var year = 2016;
-    "I think ${year} will be a great year!";
-    "I think ${ year + 1 } will be even better!";
+    var year = 2016
+    "I think ${year} will be a great year!"
+    "I think ${ year + 1 } will be even better!"
 
 If you want to put a `${` inside of a string, escape the dollar sign with `\`.

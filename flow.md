@@ -44,8 +44,8 @@ It is important to note that if any of the conditions meet, after the code in th
 
 Note that blocks normally begin with `{` and end with `}`, but Orange allows replacing the `{` with a semicolon for a one-line block:
 
-	var a = 5;
-	if (condition): a += 8;
+	var a = 5
+	if (condition): a += 8
 
 This single-expression block can be used anywhere a block is allowed, including functions.
 
@@ -66,8 +66,8 @@ The `initializer` of the loop is always ran only once before the loop begins. Af
 
 An example of looping through all numbers 1 to 10 to sum them is as follows:
 
-    int sum = 0;
-    for (int i = 1; i <= 10; i++): sum += i;
+    int sum = 0
+    for (int i = 1; i <= 10; i++): sum += i
 
 ## foreach
 
@@ -76,9 +76,9 @@ An example of looping through all numbers 1 to 10 to sum them is as follows:
 
 `foreach` can be used to iterate over an object that implements `Iterable` or for an object that an iterator can be created for. See [Interfaces](interfaces.md) for more details.
 
-    int sum = 0;
+    int sum = 0
     foreach (var i in [1 ... 10]) {
-        sum += i;
+        sum += i
     }
 
 In this example, `[1 ... 10]` is a plain array, so an iterator is created for it. The behavior where certain objects can have iterators built from them is built-in to the compiler and can't be replicated in code.
@@ -116,7 +116,7 @@ Do while is like a while loop where the code block is executed before the condit
 
     do {
         // code block
-    } while (condition);
+    } while (condition)
 
 ## Loop control
 
@@ -149,7 +149,7 @@ The syntax is as follows:
 
 In a switch statement, you can have as many patterns as you wish, and `_` can be omitted. If `_` is present, it'll match for any pattern that wasn't already matched. A pattern can be matched against constants:
 
-    var x = 0;
+    var x = 0
     switch x {
        0 => "zero",
        1 => "one",
@@ -171,9 +171,9 @@ In this example, we excluded `_` from the switch list, since that last pattern, 
 
 Multiple patterns can be used with commas:
 
-    var x = 0;
-    switch x {
-        0, 1 =. "zero or one",
+    var x = 0
+    switch (x) {
+        0, 1 => "zero or one",
         _ => "neither zero nor one"
     }
 
@@ -190,16 +190,18 @@ Enums can also be used for pattern matching. See Enumerations for more details.
 	yield_stmt -> "yield" expression
 	statement  -> yield_stmt term
 
-Any control block can be used as a value, if it would produce a value in all scenarios. For example, an if block can be used as a value if it has an else, and all if blocks `yield` some value.
+If statements and switch blocks can be used as a value, if it would produce a value in all scenarios. For example, an if block can be used as a value if it has an else, and all if blocks `yield` some value.
 
     var a = if (5 > 10) {
-        yield 0;
+        yield 0
     } else {
-        yield 1;
-    };
+        yield 1
+    }
 
-Yield has a shorthand for easier use: if the last statement in a block does not have a semicolon, that will be used as the yield value. Using this, the previous example can be rewritten as follows: `var a = if (5 > 10) { 0 } else { 1 };`
+Yield must be declared explicitly, except in the case of one-line blocks. One-line blocks imply `yield` for control blocks and `return` for functions if the expression is not termined with a semicolon. For example, the previous code could also be written as:
 
-Loops that use `continue` and `break` can be used as values only if each continue and break statement has a yield-value (e.g., `break 5` or `continue myVar`). If the main block of the loop does not have a terminating statement (i.e., `continue`, `break`), it will need a `yield` statement to be properly used as a value.
+	var a = if (5 > 10): 0
+	        else: 1
 
-If a block is used as a value, all of yield statements (including continue and break) must have the same data type.
+
+If a block is used as a value, all of yield statements must have the same data type. Note, however, that implicit yield statements are unchecked unless the block's value is being used.

@@ -1,7 +1,11 @@
 # Functions
 
     function   -> "def" fn_name? "(" param_list ")" ("->" type)? block
+    type       -> func_ty
+    func_ty    -> "(" type_list? ")" "->" type
     param_list -> var_decl? | var_decl ("," var_decl)*
+
+    type_list  -> type (COMMA type)*
 
     statement  -> function
 
@@ -9,14 +13,14 @@ Functions are anonymous or named expressions that can be called at any point to 
 
 Note that if a function parameter is declared with an initial value, then all parameters after it must also have an initial value.
 
-The optional type at the end of the function indicates the functions return type. If a return type is specified, a return statement must be present in the function. Similarly to using blocks as values, if the last statement in a function does not have a semicolon, it will be used as the return value. `yield` can be used to give a value to the function, but `return` is preferred as it can be used from any nested block.
+The optional type at the end of the function indicates the functions return type. If a return type is specified, a return statement must be present in the function. `yield` is not valid in the context of a function, but implicit returns can still be achieved by using the one-line block `:` syntax.
 
 Here are some examples of functions:
 
-    def add(int a, int b) -> int: a + b;
+    def add(int a, int b) -> int: a + b
 
     def subtract(int a, int b) {
-        return a - b;
+        return a - b
     }
 
     def doNothing() { }
@@ -49,8 +53,8 @@ Its worthwhile to touch base base on the differences between `yield` and `return
 
 An anonymous function can be constructed simply by ommitting its function name. Like other functions, it can be used as a value.
 
-    var add = def(int a, int b): a + b ;
-    var res = add(12, 95);
+    var add = def(int a, int b): a + b
+    var res = add(12, 95)
 
 ## Aggregate functions
 
@@ -66,21 +70,21 @@ Common code for functions can be shared using an aggregate definition:
 For the following example, pretend a `println` is defined that will print a line to the console. Then:
 
     aggregate {
-       println("Calculating...");
-       int result = 0;
+       println("Calculating...")
+       int result = 0
 
        def add(int a, int b) {
-           result = a + b;
-           return result;
+           result = a + b
+           return result
        }
 
        def subtract(int a, int b) {
-           result = a - b;
-           return result;
+           result = a - b
+           return result
        }
 
        // prints the result in a string
-       println("Result: ${result}");
+       println("Result: ${result}")
     }
 
 Any code before a function will be ran before that function executes. Likewise, any code after a function will run after that function's return statement is called.
@@ -88,16 +92,16 @@ Any code before a function will be ran before that function executes. Likewise, 
 Aggregate blocks also define a `value` which represent the return value of the functions. Using `value`, we can replace the previous example with the much simpler code:
 
     aggregate {
-       println("Calculating...");
+       println("Calculating...")
 
-       def add(int a, int b) { a + b }
-       def subtract(int a, int b) { a - b }
+       def add(int a, int b): a + b
+       def subtract(int a, int b): a - b
 
-       println("Result: ${value}");
+       println("Result: ${value}")
     }
 
-    var b = 16;
-    add(3, b);
+    var b = 16
+    add(3, b)
     // => Calculating...
     // => Result: 19
 
@@ -119,5 +123,5 @@ An external C function can be declared by prefixing the `def` with `extern`. Not
 
 For example, if we wanted to call `printf`:
 
-    extern def printf(char* s, ...) -> int32;
-    printf("Hello, world! The year is %d\n", 2016);
+    extern def printf(char* s, ...) -> int32
+    printf("Hello, world! The year is %d\n", 2016)

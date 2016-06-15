@@ -3,18 +3,18 @@
 A method is a function defined inside a class, and defines a function that can be used on an instance of that class.
 
     class Pet {
-        public Species species;
-        public string name;
-        public int age;
+        public Species species
+        public string name
+        public int age
 
         public def sayHello() {
-            println("Hi, I'm {name}!");
+            println("Hi, I'm {name}!")
         }
     }
 
-    var polly = Pet();
-    polly.name = "Polly";
-    polly.sayHello(); // prints "Hi, I'm Polly!";
+    var polly = Pet()
+    polly.name = "Polly"
+    polly.sayHello() // prints "Hi, I'm Polly!"
 
 Inside a class method, a special variable called `this` is defined. `this` refers to the specific instance of the class upon which the method is being called. For example, `this.name` inside of `Pet.sayHello` would refer to that pet's name. However, `this` can be omitted unless the name of the member you're trying to access has been shadowed.
 
@@ -32,31 +32,31 @@ Class instances will be deleted when the object goes out of scope _or_, if the o
 Constructors can also take parameters. If you wish to make `Pet` more complex, where its species, name, and age could only be set once, you can use constructors to achieve that behavior:
 
     class Pet {
-        private Species species;
-        private string name;
-        private int age;
+        private Species species
+        private string name
+        private int age
 
-        public Species getSpecies() { species }
-        public string getName() { name }
-        public int getAge() { age }
+        public Species getSpecies(): species
+        public string getName(): name
+        public int getAge(): age
 
         public def sayHello() {
-            println("Hi, I'm {name}!");
+            println("Hi, I'm {name}!")
         }
 
         public Pet(Species species, string name, int age) {
-            this.species = species;
-            this.name = name;
-            this.age = age;
+            this.species = species
+            this.name = name
+            this.age = age
         }
 
         public ~Pet() {
-            println("{name} says goodbye!");
+            println("{name} says goodbye!")
         }
     }
 
-    var polly = Pet(Species.Parrot, "Polly", 1);
-    polly.sayHello(); // prints "Hi, I'm Polly!";
+    var polly = Pet(Species.Parrot, "Polly", 1)
+    polly.sayHello() // prints "Hi, I'm Polly!"
 
 ## Operator Overloading
 
@@ -67,16 +67,17 @@ Certain operators can be overloaded by a class to call custom behavior: `+`, `- 
 An operator is overloaded just like declaring a function, but the name of the function is `operator` followed by the name of the operator.
 
     class Number {
-        private int mInternal;
+        private int mInternal
 
-        public int value() { mInternal }
+        public int value(): mInternal
 
-        public Number(int val) { mInternal = val; }
+        public Number(int val): mInternal = val;
 
-        public def operator+(Number other) -> Number { Number(mInternal + other.mInternal) }
+        public def operator+(Number other) -> Number:
+            Number(mInternal + other.mInternal)
     }
 
-    var a = Number(5);
-    var b = Number(52);
-    var c = a + b;
+    var a = Number(5)
+    var b = Number(52)
+    var c = a + b
     // c.value() == 57

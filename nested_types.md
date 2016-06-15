@@ -11,4 +11,4 @@ For example:
          }
     }
 
-    Run.RunType ty = Run.RunType.TEST;
+    Run.RunType ty = Run.RunType.TEST
