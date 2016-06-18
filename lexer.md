@@ -120,3 +120,6 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	PUBLIC             -> "public"
 	GET                -> "get"
 	SET                -> "set"
+	VIRTUAL            -> "virtual"
+	FINAL              -> "final"
+	PARTIAL            -> "partial"

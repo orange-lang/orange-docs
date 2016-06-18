@@ -104,13 +104,13 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	type_cast            -> "(" type ")" expression
 
-	enum                 -> privacy "enum" identifier "{" enum_values? "}"
+	enum                 -> flags? "enum" identifier "{" enum_values? "}"
 	enum_values          -> enum_value ("," enum_value)*
 	enum_value           -> identifier ( "(" param_list? ")" )?
 	enum_access          -> identifier "." identifier
 	enum_pattern         -> member_access "(" arg_list? ")"
 
-	class                -> privacy "class" identifier (":" super_list)?
+	class                -> flags? "class" identifier (":" super_list)?
 	super_list           -> identififer ("," identifier)*
 	partial_class        -> "partial" class
 	member_access        -> identifier "." identifier
@@ -151,7 +151,8 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	switch               -> "switch" "(" expression ")" switch_block
 	switch_block         -> "{" switch_match ("," switch_match)* "}"
-    switch_match         -> switch_pattern "," switch_pattern ":" switch_value
+    switch_match         -> switch_pattern ("," switch_pattern)* ":"
+	                        switch_value
     switch_value         -> expression | "{" ( statement | expression )* "}"
     switch_pattern       -> ("_" | expression ) | enum_pattern
 
@@ -162,9 +163,9 @@ This is a compilation of the various bits of grammar defined throughout this doc
     func_type            -> "(" type_list? ")" "->" type
     type_list            -> type (COMMA type)*
 
-    function             -> privacy "def" fn_name? "(" param_list? ")"
+    function             -> flags? "def" fn_name? "(" param_list? ")"
 	                        ("->" type)? block
-    extern_fn            -> privacy "extern" "def" fn_name "(" param_list? ")"
+    extern_fn            -> flags? "extern" "def" fn_name "(" param_list? ")"
 	                        "->" type
     param_list           -> var_decl ("," var_decl)*
 
@@ -186,9 +187,12 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	delete               -> "delete" expression
 	pointer_type         -> type "*"
 
+	flags                -> flag+
+	flag                 -> privacy | virtual | "partial"
+	virtual              -> "virtual" | "final"
 	privacy              -> "private" | "protected" | "public"
 
 	getter               -> "get" block
 	setter               -> "set" block
 
-	property             -> "property" identifier "->" type block
+	property             -> flags? "property" identifier "->" type block
