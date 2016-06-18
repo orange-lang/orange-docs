@@ -26,7 +26,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	statement            -> var_decl | class | long_block
 	statement            -> break_stmt | continue_stmt
-	statement            -> yield_stmt | function | aggregate
+	statement            -> yield_stmt | function | aggregate | struct
 	statement            -> extern_fn
 	statement            -> interface | destructor | namespace
 	statement            -> import
@@ -60,7 +60,8 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	unary_expr           -> pre_increment | post_increment | pre_decrement
 	unary_expr           -> post_decrement | deference | reference
 
-	var_decl             -> type variable_name ( "=" expression )?
+	var_decl             -> type variable_name (":" expression)?
+	                        ( "=" expression )?
 
 	addition             -> expression "+" expression
 	subtraction          -> expression "-" expression
@@ -114,6 +115,8 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	super_list           -> identififer ("," identifier)*
 	partial_class        -> "partial" class
 	member_access        -> identifier "." identifier
+
+	struct               -> flags? "struct" identifier block
 
 	array_type           -> data_type "[" expression "]"
 	array_expression     -> "[" arr_elements "]"

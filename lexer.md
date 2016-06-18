@@ -123,3 +123,4 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	VIRTUAL            -> "virtual"
 	FINAL              -> "final"
 	PARTIAL            -> "partial"
+	STRUCT             -> "struct"

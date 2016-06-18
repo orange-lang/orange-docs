@@ -47,3 +47,21 @@ Classes in the same compilation unit can be marked as partial to spread out the 
     }
 
 If using partial classes, all class fragments must be marked as partial. Each partial fragment is allowed to define more members for that class.
+
+## Structs
+
+Orange also has support for structs, which are classes without RTTI, inheritance, or methods. It may seem like they're pointless in comparison, but they provide setting the size of each individual field in bits:
+
+	statement -> struct
+	struct    -> "struct" IDENTIFIER block
+	var_decl  -> type variable_name (":" expression)? ( "=" expression )?
+
+A colon after the variable name can dictate the size of the field, which is only valid in a struct block. An instance of a struct can be created by calling the struct as a function and passing in named parameters to each of the fields:
+
+	struct Person {
+	    // I don't think a person will ever be older than 255.
+		int age : 8
+		const char* name
+	}
+
+	Person alfred = Person(name: "Alfred", age: 63)
