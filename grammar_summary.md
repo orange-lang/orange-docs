@@ -3,7 +3,7 @@
 This is a compilation of the various bits of grammar defined throughout this documentation.
 
 	program              -> statements?
-	statements           -> statement (TERM statement)*
+	statements           -> statement (term statement)*
 
 	term                 -> "\n"
 
@@ -104,14 +104,14 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	type_cast            -> "(" type ")" expression
 
-	enum                 -> privacy "enum" identifier "{" enum_values "}"
-	enum_values          -> enum_value? | enum_value ("," enum_value)*
-	enum_value           -> identifier ( "(" param_list ")" )?
+	enum                 -> privacy "enum" identifier "{" enum_values? "}"
+	enum_values          -> enum_value ("," enum_value)*
+	enum_value           -> identifier ( "(" param_list? ")" )?
 	enum_access          -> identifier "." identifier
-	enum_pattern         -> member_access "(" arg_list ")"
+	enum_pattern         -> member_access "(" arg_list? ")"
 
 	class                -> privacy "class" identifier (":" super_list)?
-	super_list           -> identifier? | identififer ("," identifier)*
+	super_list           -> identififer ("," identifier)*
 	partial_class        -> "partial" class
 	member_access        -> identifier "." identifier
 
@@ -162,21 +162,21 @@ This is a compilation of the various bits of grammar defined throughout this doc
     func_type            -> "(" type_list? ")" "->" type
     type_list            -> type (COMMA type)*
 
-    function             -> privacy "def" fn_name? "(" param_list ")"
+    function             -> privacy "def" fn_name? "(" param_list? ")"
 	                        ("->" type)? block
-    extern_fn            -> privacy "extern" "def" fn_name "(" param_list ")"
+    extern_fn            -> privacy "extern" "def" fn_name "(" param_list? ")"
 	                        "->" type
-    param_list           -> var_decl? | var_decl ("," var_decl)*
+    param_list           -> var_decl ("," var_decl)*
 
-    fn_call              -> expression "(" arg_list ")"
-    arg_list             -> arg? | arg ("," arg)*
+    fn_call              -> expression "(" arg_list? ")"
+    arg_list             -> arg ("," arg)*
     arg                  -> expression | named_expr
 
     aggregate            -> "aggregate" block
 
 	interface            -> "interface" identifier block
 
-	constructor          -> identifier "(" param_list ")" block
+	constructor          -> identifier "(" param_list? ")" block
 	destructor           -> "~" identifier "(" ")" block
 
 	namespace            -> "namespace" identifier block?
