@@ -1,2 +1,3 @@
 - Type and function attributes
 - Nullable types
+- Structs w/ bitfields
