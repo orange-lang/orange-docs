@@ -5,7 +5,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	program              -> statements?
 	statements           -> statement (TERM statement)*
 
-	term                 -> ";" | "\n"
+	term                 -> "\n"
 
 	type                 -> tuple_type | array_type | pointer_type | func_type
 	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
@@ -24,18 +24,20 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	short_block          -> ":" statement
 	block                -> long_block | short_block
 
-	statement            -> var_decl | expression | class | long_block
+	statement            -> var_decl | class | long_block
 	statement            -> break_stmt | continue_stmt
 	statement            -> yield_stmt | function | aggregate
 	statement            -> extern_fn
 	statement            -> interface | destructor | namespace
 	statement            -> import
-	statement            -> getter | setter | property | enum | expression
+	statement            -> getter | setter | property | enum | expr_statement
+
+	expr_statement       -> expression ";"?
 
 	expression           -> binop_expr | unary_expr | value | control
 	expression           -> access_tuple | named_expr | temp_tuple_elem
 	expression           -> fn_call | new | delete | member_access | "this"
-	expression           -> "(" expression ")" | ternary | %epsilon
+	expression           -> "(" expression ")" | ternary
 
 	value                -> array_expression | array_access_expr
 	value                -> inclusive_range_expr | exlusive_range_expr
