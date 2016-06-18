@@ -191,4 +191,4 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	getter               -> "get" block
 	setter               -> "set" block
 
-	property             -> privacy type identifier block
+	property             -> "property" identifier "->" type block

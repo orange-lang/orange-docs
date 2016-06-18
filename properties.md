@@ -3,7 +3,7 @@
 	getter    -> "get" block
 	setter    -> "set" block
 
-	property  -> type identifier block
+	property  -> "property" identifier "->" type block
 
 	statement -> getter | setter | property
 
@@ -15,13 +15,13 @@ Properties are methods that are used like regular members. They can be defined i
         private string name
         private int age
 
-        public Species Species {
+        public property Species -> Species {
 			get: species
         }
-        public string Name {
+        public property Name -> string {
 			get: name
         }
-        public int Age {
+        public Age -> int {
 			get: age
 			set: age = value
         }
