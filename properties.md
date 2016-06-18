@@ -3,7 +3,7 @@
 	getter    -> "get" block
 	setter    -> "set" block
 
-	property  -> "property" identifier "->" type block
+	property  -> "property" identifier ("->" type)? block
 
 	statement -> getter | setter | property
 
@@ -18,9 +18,11 @@ Properties are methods that are used like regular members. They can be defined i
         public property Species -> Species {
 			get: species
         }
+
         public property Name -> string {
 			get: name
         }
+
         public Age -> int {
 			get: age
 			set: age = value
@@ -36,6 +38,17 @@ Properties are methods that are used like regular members. They can be defined i
     var polly = Pet(Species.Parrot, "Polly", 1)
     println("Polly's age: {polly.Age}") // valid, as a getter is defined for Age.
     polly.Age = 2 // valid, as a setter is defined for Age
+
+If the type of the property is ommited, it is inferred from the get.
+
+The shorthand blocks can be used as well with properties. Using that format will cause the getter and setter to access and modify the expression. It's useful if you want to have placeholders for accessing private members where custom code may be added later. Our three properties could be replaced with the following:
+
+	// Typed ommited for inferrence, but could be defined explicitly
+	public property Species: species
+	public property Name: name
+	public property Age: age
+
+Note that the expression of the short-hand property block must be an lvalue to compile properly.
 
 Getters and setters are functions, so any code can be executed in them. In a setter, `value` is defined as the new value being assigned to the property. It can be ignored if desired.
 
