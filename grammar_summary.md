@@ -136,8 +136,8 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	temp_tuple_elem      -> "_"
 
-	if                   -> "if" "(" expression ")" (elif | else)? block
-	elif                 -> "elif" "(" expression ")" (elif | else)? block
+	if                   -> "if" "(" expression ")" block (elif | else)?
+	elif                 -> "elif" "(" expression ")" block (elif | else)?
 	else                 -> "else" block
 
 	ternary              -> "(" expression ")" "?" expression ":" expression

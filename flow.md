@@ -10,8 +10,8 @@ Orange provides control blocks that can optionally execute code if a condition i
 	short_block -> ":" statement
 	block       -> long_block | short_block
 
-	if         -> "if" "(" expression ")" (elif | else)? block
-	elif       -> "elif" "(" expression ")" (elif | else)? block
+	if         -> "if" "(" expression ")" block (elif | else)?
+	elif       -> "elif" "(" expression ")" block (elif | else)?
 	else       -> "else" block
 
 	expression -> if
@@ -141,7 +141,7 @@ Loops can have their blocks controlled by using `continue` or `break` statements
 
 	switch         -> "switch" "(" expression ")" switch_block
 	switch_block   -> "{" switch_match ("," switch_match)* "}"
-    switch_match   -> switch_pattern "," switch_pattern ":" switch_value
+    switch_match   -> switch_pattern ("," switch_pattern)* ":" switch_value
     switch_value   -> expression | "{" ( statement | expression )* "}"
     switch_pattern -> ("_" | expression )
 
