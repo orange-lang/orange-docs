@@ -17,6 +17,14 @@ would add a constant value `N` to the parameter `a`. Note that since N is used a
 
 ## Generic constraints
 
+	generics        -> "<" generic_values? (":" constraints)? ">"
+	generic_values  -> IDENTIFIER ("," IDENTIFIER)*
+
+	constraints     -> constraint ("," constraint)*
+	constraint      -> "where" IDENTIFIER "=" type_constraint
+	type_constraint -> "class" | "new()" | identifier
+	type_constraint -> "data" type | type
+
 Constraints can be applied to generic types. Inside the generic definition of `<>`, adding a `:` after the list of generic names allows you to apply constaints, delimited by commas. The syntax to define a constraint starts with a `where`, followed by the generic type, and then the constraint.
 
 Here are the list of valid constraints that can be used:
@@ -26,8 +34,7 @@ Here are the list of valid constraints that can be used:
 - `where T = <base class>` - T must inherit from base class
 - `where T = <interface>` - T must implement interface
 - `where T = U` - T must be or derive from the type supplied for U.
-- `where T = data <constraint>` - T must be data of another constraint.
-- `where T = typename` - T must be any type, including plain data like int
-- `where T = <typename>` - T must be of typename
+- `where T = data <type>` - T must be value of type constraint.
+- `where T = <type>` - T must be of plain data type
 
 For the `data <constraint>` constraint, our constAdd<N> could be constrained to: `def constAdd<N : where N = data int>(var a) { a + N }`.

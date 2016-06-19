@@ -166,7 +166,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
     func_type            -> "(" type_list? ")" "->" type
     type_list            -> type (COMMA type)*
 
-    function             -> flags? "def" fn_name? "(" param_list? ")"
+    function             -> flags? "def" fn_name? generics? "(" param_list? ")"
 	                        ("->" type)? block
     extern_fn            -> flags? "extern" "def" fn_name "(" param_list? ")"
 	                        "->" type
@@ -175,6 +175,14 @@ This is a compilation of the various bits of grammar defined throughout this doc
     fn_call              -> expression "(" arg_list? ")"
     arg_list             -> arg ("," arg)*
     arg                  -> expression | named_expr
+
+	generics             -> "<" generic_values? (":" constraints)? ">"
+	generic_values       -> IDENTIFIER ("," IDENTIFIER)*
+
+	constraints          -> constraint ("," constraint)*
+	constraint           -> "where" IDENTIFIER "=" type_constraint
+	type_constraint      -> "class" | "new()" | identifier
+	type_constraint      -> "data" type | type
 
     aggregate            -> "aggregate" block
 

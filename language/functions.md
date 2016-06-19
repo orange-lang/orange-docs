@@ -1,6 +1,6 @@
 # Functions
 
-    function   -> "def" fn_name? "(" param_list ")" ("->" type)? block
+    function   -> "def" fn_name? generics? "(" param_list ")" ("->" type)? block
     type       -> func_type
     func_type  -> "(" type_list? ")" "->" type
     param_list -> var_decl? | var_decl ("," var_decl)*
@@ -113,7 +113,7 @@ Note that although aggregate blocks support the one-line block syntax, it's poin
 ## Calling C functions
 
     extern_fn -> "extern" "def" fn_name "(" param_list ")" "->" type
-    statement -> extern_fn 
+    statement -> extern_fn
 
 An external C function can be declared by prefixing the `def` with `extern`. Note that there are some limitations to this:
 
