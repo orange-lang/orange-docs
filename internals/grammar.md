@@ -1,6 +1,6 @@
 # Grammar
 
-This file outlines the BNF grammar that Orange will use for its parser. It is a simplified version of [Grammar Summary](grammar_summary.md).
+This file outlines the BNF grammar that Orange will use for its parser. It is a simplified version of [Grammar Summary](../language/grammar_summary.md).
 
 	program              -> opt_statements
 
