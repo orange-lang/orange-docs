@@ -62,7 +62,7 @@ A tuple is a collection of a set of values whose components may be different typ
 
 A tuple of a single element must have a trailing comma: `(a,)`. This is to avoid confusion with expressions where parenthesis are used, like `(5 + 3) * 2`.
 
-## Named Tuples
+### Named Tuples
 
 	tuple_value -> named_expr
 	named_expr  -> name ":" expression
@@ -74,7 +74,7 @@ Tuples may have named elements, which can be used as substitute for using offset
     // tuple.animal == tuple.0 == "dog"
     // tuple.year == tuple.1 == 2016
 
-## Deconstructing Tuples
+### Deconstructing Tuples
 
 	var_decl        -> tuple_type "(" name ("," name)* ","? ")"
 	temp_tuple_elem -> "_"
