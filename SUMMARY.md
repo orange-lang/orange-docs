@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [License](LICENSE.md)
-* [Language](language/introduction.md)
+* [Language](language/README.md)
   * [Constants](language/constants.md)
   * [Basic Operations](language/basic.md)
   * [Collections](language/collections.md)
@@ -23,6 +23,6 @@
   * [Namespaces &amp; packages](language/namespaces.md)
   * [Generics](language/generics.md)
   * [Grammar Summary](language/grammar_summary.md)
-* [Compiler Internals](internals/compiler.md)
+* [Compiler Internals](internals/README.md)
   * [Lexer Tokens](internals/lexer.md)
   * [Parser Grammar](internals/grammar.md)
