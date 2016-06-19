@@ -5,8 +5,9 @@
 
 	expression   -> new | delete
 	pointer_type -> type "*"
+	ref_type     -> type "&"
 
-	type         -> pointer_type 
+	type         -> pointer_type
 
 In Orange, pointers can be used to refer to a memory location where a value of a specific type is stored. For example, `int*` refers to a memory location where an int is stored.
 

@@ -11,7 +11,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
 	type                 -> "int64" | "uint8" | "uint16" | "uint32"
 	type                 -> "uint64" | "float" | "double" | "var" | "void"
-	type                 -> identifier
+	type                 -> identifier | ref_type
 
 	identifier           -> "_"? ( alphas | "_" ) ( alphanumerics | "_" )*
 	identifier           -> "operator" operator
@@ -189,6 +189,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	new                  -> "new" identifier
 	delete               -> "delete" expression
 	pointer_type         -> type "*"
+	ref_type             -> type "&"
 
 	flags                -> flag+
 	flag                 -> privacy | virtual | "partial"
