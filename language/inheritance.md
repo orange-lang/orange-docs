@@ -6,7 +6,7 @@ The child class can access any of the parents methods and members that are eithe
 
 The child class may refer to the parent class' methods by name, or if the members are shadowed, by using the name of the parent class or the keyword `super`.
 
-Methods can be overriden by child classes by default. When storing an instance of a child class into a variable that is typed with a parent class, calling overriden methods will call the child class' implementation (this is called _polymorphism_. See [Pointers](Pointers.md) for more information). To avoid this, a method must be marked as `final` in the parent class:
+Methods can be overriden by child classes by default. When storing an instance of a child class into a variable that is typed with a parent class, calling overriden methods will call the child class' implementation (this is called _polymorphism_. See [Pointers](pointers.md) for more information). To avoid this, a method must be marked as `final` in the parent class:
 
     final def foo() {
         // implementation
