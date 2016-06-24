@@ -50,7 +50,7 @@ Constructors can also take parameters. If you wish to make `Pet` more complex, w
             this.age = age
         }
 
-        public ~Pet() {
+        public def ~Pet() {
             println("{name} says goodbye!")
         }
     }

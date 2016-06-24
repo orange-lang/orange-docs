@@ -204,10 +204,6 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	interface            -> INTERFACE IDENTIFIER block
 
-	constructor          -> IDENTIFIER OPEN_PAREN opt_param_list CLOSE_PAREN
-	                        block
-	destructor           -> TILDE IDENTIFIER OPEN_PAREN CLOSE_PAREN block
-
 	namespace            -> NAMESPACE identifier opt_block
 	opt_block            -> block | %epsilon
 	import               -> IMPORT identifier

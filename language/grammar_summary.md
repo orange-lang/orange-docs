@@ -14,7 +14,9 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	type                 -> identifier | ref_type
 
 	identifier           -> "_"? ( alphas | "_" ) ( alphanumerics | "_" )*
-	identifier           -> "operator" operator
+	identifier           -> full_id | operator_id | dtor_id
+	operator_id          -> "operator" operator
+	dtor_id              -> "~" IDENTIFIER
 
 	alphas               -> ( "A" ... "Z" | "a" ... "z" )
 	numerics             -> "0" ... "9"
@@ -189,9 +191,6 @@ This is a compilation of the various bits of grammar defined throughout this doc
     aggregate            -> "aggregate" IDENTIFIER? block
 
 	interface            -> "interface" identifier block
-
-	constructor          -> identifier "(" param_list? ")" block
-	destructor           -> "~" identifier "(" ")" block
 
 	namespace            -> "namespace" identifier block?
 	import               -> "import" identifier
