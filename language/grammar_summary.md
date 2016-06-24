@@ -184,7 +184,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	type_constraint      -> "class" | "new()" | identifier
 	type_constraint      -> "data" type | type
 
-    aggregate            -> "aggregate" block
+    aggregate            -> "aggregate" IDENTIFIER? block
 
 	interface            -> "interface" identifier block
 

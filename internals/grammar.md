@@ -168,6 +168,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	base_function        -> DEF opt_identifier opt_generics OPEN_PAREN
 	                        opt_param_list CLOSE_PAREN opt_func_type block
 	opt_identifier       -> identifier | %epsilon
+	opt_name             -> IDENTIFIER | %epsilon
 	opt_param_list       -> param_list | %epsilon
 	param_list           -> var_decl param_list'
 	param_list'          -> COMMA param_list | %epsilon
@@ -195,7 +196,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	type_constraint      -> CLASS | NEW OPEN_PARNE CLOSE_PAREN
 	type_constraint      -> identifier | DATA type | type
 
-    aggregate            -> AGGREGATE block
+    aggregate            -> AGGREGATE opt_name block
 
 	interface            -> INTERFACE IDENTIFIER block
 

@@ -58,7 +58,7 @@ An anonymous function can be constructed simply by ommitting its function name. 
 
 ## Aggregate functions
 
-    aggregate -> "aggregate" block
+    aggregate -> "aggregate" identifier? block
     statement -> aggregate
 
 Common code for functions can be shared using an aggregate definition:
@@ -109,6 +109,8 @@ Aggregate blocks also define a `value` which represent the return value of the f
 `value` is _not_ a constant and can be modified, if so desired. However, note that if `value` is used, none of the functions defined in the aggregate block can return `void`. The functions in an aggregate block can, however, have different return types, since the statements inside an aggregate block are just templates.
 
 Note that although aggregate blocks support the one-line block syntax, it's pointless in the context of an aggregate, since aggregate statements are only called when a function declared inside an aggregate is called.
+
+Aggregates can also be named, which is only used for extensions. 
 
 ## Calling C functions
 
