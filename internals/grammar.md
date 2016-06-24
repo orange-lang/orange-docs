@@ -13,9 +13,13 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	type                 -> tuple_type | array_type | pointer_type | func_type
 	type                 -> INT | UINT | INT8 | INT16 | INT32 | INT64
 	type                 -> UINT8 | UINT16 | UINT32 | UINT64
-	type                 -> FLOAT | DOUBLE | VAR | VOID | full_id | ref_type
+	type                 -> FLOAT | DOUBLE | VAR | VOID | named_id | ref_type
 
-	identifier           -> full_id | operator_id | dtor_id
+	identifier           -> operator_id | named_id
+	named_id             -> id_types opt_generic_spec
+	opt_generic_spec     -> generic_spec | %epsilon
+	generic_spec         -> LESS_THAN OF type_list GREATER_THAN
+	id_types             -> full_id | dtor_id
 	full_id              -> IDENTIFIER full_id'
 	full_id'             -> DOT identifier | %epsilon
 	operator_id          -> OPERATOR operator
@@ -32,7 +36,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	statement            -> interface | destructor | namespace
 	statement            -> import | extension
 	statement            -> getter | setter | property | enum | expr_statement
-	statement            -> try_block 
+	statement            -> try_block
 
 	expr_statement       -> expresssion expr_statement'
 	expr_statement'      -> SEMICOLON | %epsilon
@@ -68,8 +72,8 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	var_decl             -> opt_const VAR identifiers opt_type_spec_list
 	                        opt_value
 	opt_const            -> CONST | %epsilon
-	identifiers          -> IDENTIFIER | OPEN_PAREN identifer_list CLOSE_PAREN
-	identifier_list      -> IDENTIFIER identifier_list'
+	identifiers          -> named_id | OPEN_PAREN identifer_list CLOSE_PAREN
+	identifier_list      -> named_id identifier_list'
 	identifier_list'     -> COMMA identifier_list | %epsilon
 	opt_type_spec_list   -> COLON type_list | %epsilon
 	opt_value            -> ASSIGN expression | %epsilon
@@ -86,19 +90,19 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	type_cast            -> OPEN_PAREN type CLOSE_PAREN expression
 
 	enum                 -> flags enum_base | enum_base
-	enum_base            -> ENUM full_id OPEN_CURLY opt_enum_values
+	enum_base            -> ENUM named_id OPEN_CURLY opt_enum_values
 	                        CLOSE_CURLY
 	opt_enum_values      -> enum_values | %epsilon
 	enum_values          -> enum_value enum_values'
 	enum_values'         -> COMMA enum_values
 	enum_value           -> IDENTIFIER opt_enum_params
 	opt_enum_params      -> OPEN_PAREN param_list CLOSE_PAREN | %epsilon
-	enum_patterm         -> full_id OPEN_PAREN arg_list CLOSE_PAREN
+	enum_patterm         -> named_id OPEN_PAREN arg_list CLOSE_PAREN
 
 	class                -> flags base_class | base_class
 	base_class           -> CLASS IDENTIFIER opt_supers class_body
 	opt_supers           -> COLON super_list | %epsilon
-	super_list           -> full_id super_list'
+	super_list           -> named_id super_list'
 	super_list'          -> COMMA super_list
 	partial_class        -> flags PARTIAL base_class
 
@@ -213,17 +217,17 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	constraints'         -> COMMA constraints | %epsilon
 	constraint           -> WHERE IDENTIFIER ASSIGN type_constraint
 	type_constraint      -> CLASS | NEW OPEN_PAREN CLOSE_PAREN
-	type_constraint      -> identifier | DATA type | type
+	type_constraint      -> named_id | DATA type | type
 
     aggregate            -> AGGREGATE opt_name block
 
 	interface            -> INTERFACE IDENTIFIER block
 
-	namespace            -> NAMESPACE identifier opt_block
+	namespace            -> NAMESPACE named_id opt_block
 	opt_block            -> block | %epsilon
-	import               -> IMPORT identifier
+	import               -> IMPORT named_id
 
-	new                  -> NEW identifier
+	new                  -> NEW named_id
 	delete               -> DELETE expression
 	pointer_type         -> type TIMES
 	ref_type             -> type BIT_AND
@@ -237,10 +241,10 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	getter               -> GET block
 	setter               -> SET block
 
-	extension            -> EXTEND identifier opt_supers block
+	extension            -> EXTEND named_id opt_supers block
 
 	property             -> flags property_base | property_base
-	property_base        -> identifier opt_func_type block
+	property_base        -> IDENTIFIER opt_func_type block
 
 	try_block            -> TRY block opt_catch_blocks opt_finally_block
 	opt_catch_blocks     -> catch_blocks | %epsilon

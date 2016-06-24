@@ -1,12 +1,16 @@
 # Generics
 
-In a function and class, the keyword `var` can be applied to class members and function/method parameters to indicate a generic parameter.
+	identifier -> identifier "<" "of" identifier ("," identifier)* ">"
+
+In a function and class, the type `var` can be applied to class members and function/method parameters to indicate a generic parameter.
 
 If we defined the function `def add(a: var, b: var): a + b`, we will have created a generic fucntion. A generic function with a type being `var` means that a copy of the function will be created for each unique combination of types in which it is called. That means `add(3, 5)` and `add(3, 5.2)` create two different functions, where one takes two integers, and the other takes an integer and a double.
 
 When var is used, each parameter gets its own, unique type. A generic type can be created by prefixing the parameter list with a list of generic types inside of `<>`. For example, `def add<T>(a: T, b: T)` will create a generic `add` where both parameters have to be the same type.
 
-Orange can infer the type of `a` and `b` based on the types of the arguments to the function. If the types are different, you must explicitly define the type of `T` in the caller: like `add<int>(5, 2.3)` or `add<float>(1, 9.2f)`.
+Orange can infer the type of `a` and `b` based on the types of the arguments to the function. If the types are different, you must explicitly define the type of `T` in the caller: like `add<of int>(5, 2.3)` or `add<of float>(1, 9.2f)`.
+
+Specifying `of` inside the brackets gives the Orage compiler a hint that we're specifying the types for generic parameters. At the time of writing, it is required to resolve ambiguities where it is not known if an identifier is generic or not.
 
 Multiple generic types can be defined as needed. `<T, V>` is a way to define two generic types named `T` and `V`, respectively.
 
@@ -17,7 +21,7 @@ Note that in the context of a function, `var` is the default type of a variable.
 ## Generics with const values
 
 Constant values can also be used as generic parameters: `def constAdd<N>(a) { a + N }`
-would add a constant value `N` to the parameter `a`. Note that since N is used as a value, it must be explicitly defined when calling the function, such as `constAdd<5>(myVar)`.
+would add a constant value `N` to the parameter `a`. Note that since N is used as a value, it must be explicitly defined when calling the function, such as `constAdd<of 5>(myVar)`.
 
 ## Generic constraints
 
@@ -41,4 +45,4 @@ Here are the list of valid constraints that can be used:
 - `where T = data <type>` - T must be value of type constraint.
 - `where T = <type>` - T must be of plain data type
 
-For the `data <constraint>` constraint, our constAdd<N> could be constrained to: `def constAdd<N : where N = data int>(var a) { a + N }`.
+For the `data <constraint>` constraint, our constAdd<N> could be constrained to: `def constAdd<N : where N = data int>(a) { a + N }`.

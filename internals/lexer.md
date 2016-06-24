@@ -132,3 +132,4 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	CATCH              -> "catch"
 	FINALLY            -> "finally"
 	THROW              -> "throw"
+	OF                 -> "of"

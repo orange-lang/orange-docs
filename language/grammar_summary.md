@@ -11,12 +11,15 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
 	type                 -> "int64" | "uint8" | "uint16" | "uint32"
 	type                 -> "uint64" | "float" | "double" | "void" | "var"
-	type                 -> full_id | ref_type
+	type                 -> named_id | ref_type
 
 	identifier           -> "_"? ( alphas | "_" ) ( alphanumerics | "_" )*
-	identifier           -> full_id | operator_id | dtor_id
+	identifier           -> operator_id | named_id
+	named_id             -> id_types generic_spec?
+	generic_spec         -> "<" "of" type_list ">"
+	id_types             -> full_id | dtor_id
 	operator_id          -> "operator" operator
-	dtor_id              -> "~" IDENTIFIER
+	dtor_id              -> "~" identifier
 
 	alphas               -> ( "A" ... "Z" | "a" ... "z" )
 	numerics             -> "0" ... "9"
