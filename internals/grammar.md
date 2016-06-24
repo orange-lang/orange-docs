@@ -49,7 +49,12 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	value                -> array_expression | array_access_expr
 	value                -> inclusive_range_expr | exlusive_range_expr
-	value                -> tuple_expr
+	value                -> tuple_expr | constant_val
+
+	constant_val         -> VAL_INT | VAL_INT8 | VAL_INT16 | VAL_INT32
+	constant_val         -> VAL_INT64 | VAL_UINT | VAL_UINT8 | VAL_UINT16
+	constant_val         -> VAL_UINT32 | VAL_UINT64 | VAL_FLOAT | VAL_DOUBLE
+	constant_val         -> VAL_STRING
 
 	control              -> if | for_loop | foreach | while | forever | do_while
 	control              -> switch
