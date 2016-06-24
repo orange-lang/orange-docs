@@ -105,9 +105,11 @@ The final class of expressions are those that operate on a single lvalue.
 	deference      -> "*" expression
 	reference      -> "&" expression
 	not_expr       -> "!" expression
+	negate_expr    -> "-" expression
 
 	expression     -> pre_increment | post_increment | pre_decrement
 	expression     -> post_decrement | deference | reference | not_expr
+	expression     -> negate_expr
 
 The pre-increment and pre-decrement's value will be the modified lvalue, whereas the post-increment and post-decrement will be equal to the lvalue before modification.
 

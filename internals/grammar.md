@@ -61,6 +61,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	unary_expr           -> pre_increment | post_increment | pre_decrement
 	unary_expr           -> post_decrement | deference | reference | not_expr
+	unary_expr           -> negate_expr
 
 	var_decl             -> type variable_name opt_size opt_value
 	opt_size             -> COLON expression | %epsilon
@@ -73,6 +74,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	deference            -> TIMES expression
 	reference            -> BIT_AND expression
 	not_expr             -> NOT expression
+	negate_expr          -> MINUS expression
 
 	type_cast            -> OPEN_PAREN type CLOSE_PAREN expression
 
