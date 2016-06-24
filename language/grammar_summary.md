@@ -26,7 +26,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	statement            -> var_decl | class | long_block
 	statement            -> break_stmt | continue_stmt
-	statement            -> yield_stmt | function | aggregate | struct
+	statement            -> yield_stmt | function | aggregate
 	statement            -> extern_fn
 	statement            -> interface | destructor | namespace
 	statement            -> import | extension
@@ -118,8 +118,6 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	super_list           -> identififer ("," identifier)*
 	partial_class        -> "partial" class
 	member_access        -> identifier "." identifier
-
-	struct               -> flags? "struct" identifier block
 
 	array_type           -> data_type "[" expression "]"
 	array_expression     -> "[" arr_elements "]"

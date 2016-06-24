@@ -33,7 +33,6 @@
   * [Privacy](language/privacy.md)
   * [Classes](language/classes.md)
     * [Partial Classes](language/classes.md#partial-classes)
-    * [Structs](language/classes.md#structs)
   * [Methods](language/methods.md)
     * [Constructors and Destructors](language/methods.md#constructors-and-destructors)
     * [Operator Overloading](language/methods.md#operator-overloading)

@@ -26,7 +26,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	statement            -> var_decl | class | long_block
 	statement            -> break_stmt | continue_stmt
-	statement            -> yield_stmt | function | aggregate | struct
+	statement            -> yield_stmt | function | aggregate
 	statement            -> extern_fn
 	statement            -> interface | destructor | namespace
 	statement            -> import | extension
@@ -94,9 +94,6 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	super_list           -> full_id super_list'
 	super_list'          -> COMMA super_list
 	partial_class        -> flags PARTIAL base_class
-
-	struct               -> flags base_struct | base_struct
-	base_struct          -> STRUCT IDENTIFIER block
 
 	array_type           -> type OPEN_BRACKET expression CLOSE_BRACKET
 	array_expression     -> OPEN_BRACKET opt_arr_elements CLOSE_BRACKET
