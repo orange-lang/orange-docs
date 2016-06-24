@@ -13,7 +13,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	type                 -> tuple_type | array_type | pointer_type | func_type
 	type                 -> INT | UINT | INT8 | INT16 | INT32 | INT64
 	type                 -> UINT8 | UINT16 | UINT32 | UINT64
-	type                 -> FLOAT | DOUBLE | VOID | full_id | ref_type
+	type                 -> FLOAT | DOUBLE | VAR | VOID | full_id | ref_type
 
 	identifier           -> namespace_id | operator_id
 	full_id              -> IDENTIFIER full_id'
