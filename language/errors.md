@@ -1,7 +1,7 @@
 # Error Handling
 
 	try_block     -> "try" block catch_block+ finally_block?
-	catch_block   -> "catch" "(" var_decl ")" block
+	catch_block   -> "catch" "(" implicit_var ")" block
 	finally_block -> "finally" block
 	throw_stmt    -> "throw" expression
 
@@ -15,7 +15,7 @@ To catch an exception, the exception to catch must be in a `try` block:
 
     try {
        // code which may throw an exception
-    } catch (var ex: ExceptionType) {
+    } catch (ex: ExceptionType) {
        // use exception to print an error
     } finally {
 	   // code that runs after the try or catch

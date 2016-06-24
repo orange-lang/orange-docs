@@ -11,9 +11,9 @@ Properties are methods that are used like regular members. They can be defined i
 
 
     class Pet {
-        private var species: Species
-        private var name: string
-        private var age: int
+        private species: Species
+        private name: string
+        private age: int
 
         public property Species -> Species {
 			get: species
@@ -28,7 +28,7 @@ Properties are methods that are used like regular members. They can be defined i
 			set: age = value
         }
 
-        public Pet(var species: Species, var name: string, var age: int) {
+        public Pet(species: Species, name: string, age: int) {
             this.species = species
             this.name = name
             this.age = age

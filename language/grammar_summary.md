@@ -118,9 +118,17 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	enum_pattern         -> member_access "(" arg_list? ")"
 
 	class                -> flags? "class" identifier (":" super_list)?
+	                        class_body
 	super_list           -> identififer ("," identifier)*
 	partial_class        -> "partial" class
 	member_access        -> identifier "." identifier
+
+	class_body           -> "{" class_stmts? "}"
+	class_stmts          -> class_stmt (term class_stmt)*
+
+	class_stmt           -> implicit_var | class | function | aggregate
+	class_stmt           -> extern_fn | import | extension | property
+	class_stmt           -> enum
 
 	array_type           -> data_type "[" expression "]"
 	array_expression     -> "[" arr_elements "]"
@@ -174,7 +182,9 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	                        ("->" type)? block
     extern_fn            -> flags? "extern" "def" fn_name "(" param_list? ")"
 	                        "->" type
-    param_list           -> var_decl ("," var_decl)*
+    param_list           -> implicit_var ("," implicit_var)*
+
+	implicit_var         -> "const"? IDENTIFIER (":" type)? ( "=" expression )?
 
     fn_call              -> expression "(" arg_list? ")"
     arg_list             -> arg ("," arg)*

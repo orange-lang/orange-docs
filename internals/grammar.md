@@ -64,12 +64,13 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	unary_expr           -> post_decrement | deference | reference | not_expr
 	unary_expr           -> negate_expr
 
-	var_decl             -> opt_const VAR identifiers opt_type_spec opt_value
+	var_decl             -> opt_const VAR identifiers opt_type_spec_list
+	                        opt_value
 	opt_const            -> CONST | %epsilon
-	identifiers          -> identifier | OPEN_PAREN identifer_list CLOSE_PAREN
-	identifier_list      -> identifier identifier_list'
+	identifiers          -> IDENTIFIER | OPEN_PAREN identifer_list CLOSE_PAREN
+	identifier_list      -> IDENTIFIER identifier_list'
 	identifier_list'     -> COMMA identifier_list | %epsilon
-	opt_type_spec        -> COLON type_list | %epsilon
+	opt_type_spec_list   -> COLON type_list | %epsilon
 	opt_value            -> ASSIGN expression | %epsilon
 
 	pre_increment        -> INCREMENT expression
@@ -94,11 +95,20 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	enum_patterm         -> full_id OPEN_PAREN arg_list CLOSE_PAREN
 
 	class                -> flags base_class | base_class
-	base_class           -> CLASS IDENTIFIER opt_supers
+	base_class           -> CLASS IDENTIFIER opt_supers class_body
 	opt_supers           -> COLON super_list | %epsilon
 	super_list           -> full_id super_list'
 	super_list'          -> COMMA super_list
 	partial_class        -> flags PARTIAL base_class
+
+	class_body           -> OPEN_CURLY opt_class_stmts CLOSE_CURLY
+	opt_class_stmts      -> class_stmts | %epsilon
+	class_stmts          -> class_stmt class_stmts'
+	class_stmts'         -> term class_stmts | %epsilon
+
+	class_stmt           -> implicit_var | class | function | aggregate
+	class_stmt           -> extern_fn | import | extension | property
+	class_stmt           -> enum
 
 	array_type           -> type OPEN_BRACKET expression CLOSE_BRACKET
 	array_expression     -> OPEN_BRACKET opt_arr_elements CLOSE_BRACKET
@@ -175,12 +185,15 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	opt_identifier       -> identifier | %epsilon
 	opt_name             -> IDENTIFIER | %epsilon
 	opt_param_list       -> param_list | %epsilon
-	param_list           -> var_decl param_list'
+	param_list           -> implicit_var param_list'
 	param_list'          -> COMMA param_list | %epsilon
 	opt_func_type        -> ARROW type | %epsilon
 	extern_fn            -> flags base_extern | base_extern
 	base_extern          -> EXTERN DEF IDENTIFIER OPEN_PAREN opt_param_list
 	                        CLOSE_PAREN ARROW type
+
+    implicit_var         -> opt_const identifiers opt_type_spec opt_value
+	opt_type_spec        -> COLON type | %epsilon
 
     fn_call              -> expression OPEN_PAREN opt_arg_list CLOSE_PAREN
 	opt_arg_list         -> arg_list | %epsilon

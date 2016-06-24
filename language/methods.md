@@ -3,9 +3,9 @@
 A method is a function defined inside a class, and defines a function that can be used on an instance of that class.
 
     class Pet {
-        public Species species
-        public string name
-        public int age
+        public species: Species
+        public name: name
+        public age: int
 
         public def sayHello() {
             println("Hi, I'm {name}!")
@@ -20,8 +20,7 @@ Inside a class method, a special variable called `this` is defined. `this` refer
 
 ## Constructors and Destructors
 
-	destructor -> "~" identifier "(" ")" block
-    statement  -> destructor
+    identifier -> "~" identifier
 
 Constructors can be used to couple custom initialization code for a class. Destructors are like constructors, but execute when the class instance is deleted.
 
@@ -44,7 +43,7 @@ Constructors can also take parameters. If you wish to make `Pet` more complex, w
             println("Hi, I'm {name}!")
         }
 
-        public Pet(Species species, string name, int age) {
+        public def Pet(species: Species, name: string, age: int) {
             this.species = species
             this.name = name
             this.age = age
@@ -67,13 +66,13 @@ Certain operators can be overloaded by a class to call custom behavior: `+`, `- 
 An operator is overloaded just like declaring a function, but the name of the function is `operator` followed by the name of the operator.
 
     class Number {
-        private int mInternal
+        private mInternal: int
 
         public def value(): mInternal
 
-        public Number(int val): mInternal = val;
+        public Number(val: int): mInternal = val;
 
-        public def operator+(Number other) -> Number:
+        public def operator+(other: Number) -> Number:
             Number(mInternal + other.mInternal)
     }
 

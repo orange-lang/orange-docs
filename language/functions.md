@@ -1,11 +1,14 @@
 # Functions
 
-    function   -> "def" fn_name? generics? "(" param_list ")" ("->" type)? block
-    type       -> func_type
-    func_type  -> "(" type_list? ")" "->" type
-    param_list -> var_decl? | var_decl ("," var_decl)*
+    function     -> "def" fn_name? generics? "(" param_list ")" ("->" type)?
+                    block
+    type         -> func_type
+    func_type    -> "(" type_list? ")" "->" type
+    param_list   -> implicit_var? | implicit_var ("," implicit_var)*
 
-    statement  -> function
+    implicit_var -> "const"? identifier (":" type)? ( "=" expression )?
+
+    statement    -> function
 
 Functions are anonymous or named expressions that can be called at any point to execute code. The parameters in function signatures work like normal variable declarations, so they can be given initial values and ommited from an argument list upon calling the function.
 
@@ -15,9 +18,9 @@ The optional type at the end of the function indicates the functions return type
 
 Here are some examples of functions:
 
-    def add(var a: int, var b: int) -> int: a + b
+    def add(a: int, b: int) -> int: a + b
 
-    def subtract(var a: int, var b: int) {
+    def subtract(a: int, b: int) {
         return a - b
     }
 
@@ -51,7 +54,7 @@ Its worthwhile to touch base base on the differences between `yield` and `return
 
 An anonymous function can be constructed simply by ommitting its function name. Like other functions, it can be used as a value.
 
-    var add = def(var a: int, var b: int): a + b
+    var add = def(a: int, b: int): a + b
     var res = add(12, 95)
 
 ## Aggregate functions
@@ -71,12 +74,12 @@ For the following example, pretend a `println` is defined that will print a line
        println("Calculating...")
        int result = 0
 
-       def add(var a: int, var b: int) {
+       def add(a: int, b: int) {
            result = a + b
            return result
        }
 
-       def subtract(var a: int, var b: int) {
+       def subtract(a: int, b: int) {
            result = a - b
            return result
        }
