@@ -20,3 +20,5 @@ Extensions operate on existing non-`final` classes, and allow you to define an i
     var dog = Dog()
     dog.sleep()
     dog.bark()
+
+Extensions can also operate on named aggregate blocks. When the identifier for an extension is an aggregate block, there must not be any elements in the super list. When extending an aggregate block, only function definitions can be added. The pre-existing header and footer from the aggregate will be used for these new functions.
