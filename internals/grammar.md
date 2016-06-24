@@ -240,20 +240,3 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	property             -> flags property_base | property_base
 	property_base        -> identifier opt_func_type block
-
-## Ambiguity
-
-Note that there are an amount of FIRST(2) conflicts for statement (`tuple_type`, `tuple_expr`, `expression`, `type_cast` all contain `OPEN_PAREN, IDENTIFIER` in their FIRST(2) sets). Contextually, we treat IDENTIFIER as a type lexeme if it is determined to be a type.
-
-To get type information, we have two phases of parsing. The first phase begins parsing, looking for any statement that would indicate a logical block. This includes things like if statements, while loops, functions, etc. As long as the statement derives a block in its list of symbols for a production rule, it counts as a logical block.
-
-When parsing a logical block, any grammar derivation in the middle of a production rule that derives an expression will be ignored. For example, the condition of for loops are ignored. These are considered non-essential for gathering type names, and are stored in a buffer assigned to the AST node ID for the created element. Function return types and the like _are_ parsed, since we
-are positive that identifiers are types.
-
-After the AST node is craeted for the logical block, its body recursively parses with the same rules applied: parse essential elements only, creating AST elements and storing non-essential elements into a buffer.
-
-The buffer is actually a stream of local buffers, where they are divided when a logical block is found. The local buffer has a reference to an AST id. If the AST ID is -1, it'll be appended to the beginning of block, otherwise it'll be placed after the block. This is used so logical blocks aren't moved out of context.
-
-After the AST is minimally created, we can call upon `libanalysis` with our AST to ask it whether or not there is a typename accessible from a specific block. Given that, we have enough information to parse the rest of the file. We walk the AST and re-parse those tokens stored in buffers. After that is completed, the file will be fully parsed.
-
-The situation for multiple files isn't much different: since one file could be depending on a type declared in a separate file, all files being compiled go through phase 1 of the parse before phase 2. That way `libanalysis` can be given all the ASTs to determine type accessibility.
