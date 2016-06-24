@@ -32,13 +32,13 @@ Class instances will be deleted when the object goes out of scope _or_, if the o
 Constructors can also take parameters. If you wish to make `Pet` more complex, where its species, name, and age could only be set once, you can use constructors to achieve that behavior:
 
     class Pet {
-        private Species species
-        private string name
-        private int age
+        private var species: Species
+        private var name: string
+        private var age: int
 
-        public Species getSpecies(): species
-        public string getName(): name
-        public int getAge(): age
+        public def getSpecies(): species
+        public def getName(): name
+        public def getAge(): age
 
         public def sayHello() {
             println("Hi, I'm {name}!")
@@ -69,7 +69,7 @@ An operator is overloaded just like declaring a function, but the name of the fu
     class Number {
         private int mInternal
 
-        public int value(): mInternal
+        public def value(): mInternal
 
         public Number(int val): mInternal = val;
 

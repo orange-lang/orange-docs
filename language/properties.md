@@ -11,9 +11,9 @@ Properties are methods that are used like regular members. They can be defined i
 
 
     class Pet {
-        private Species species
-        private string name
-        private int age
+        private var species: Species
+        private var name: string
+        private var age: int
 
         public property Species -> Species {
 			get: species
@@ -28,7 +28,7 @@ Properties are methods that are used like regular members. They can be defined i
 			set: age = value
         }
 
-        public Pet(Species species, string name, int age) {
+        public Pet(var species: Species, var name: string, var age: int) {
             this.species = species
             this.name = name
             this.age = age
@@ -43,7 +43,7 @@ If the type of the property is ommited, it is inferred from the get.
 
 The shorthand blocks can be used as well with properties. Using that format will cause the getter and setter to access and modify the expression. It's useful if you want to have placeholders for accessing private members where custom code may be added later. Our three properties could be replaced with the following:
 
-	// Typed ommited for inferrence, but could be defined explicitly
+	// Types omitted for inferrence, but could be defined explicitly
 	public property Species: species
 	public property Name: name
 	public property Age: age

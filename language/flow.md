@@ -78,7 +78,7 @@ The `initializer` of the loop is always ran only once before the loop begins. Af
 An example of looping through all numbers 1 to 10 to sum them is as follows:
 
     int sum = 0
-    for (int i = 1; i <= 10; i++): sum += i
+    for (var i: int = 1; i <= 10; i++): sum += i
 
 ## foreach
 

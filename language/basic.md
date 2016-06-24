@@ -31,10 +31,13 @@ These operations equate to _expressions_, which are statements with values.
 
 ## Variables
 
-	statement -> var_decl
-	var_decl  -> type variable_name ( "=" expression )?
+	statement   -> var_decl
+	var_decl    -> "const"? "var" identifiers (":" type_list)?
+	               ( "=" expression )?
+	identifiers -> identifier | "(" identifier ("," identifier)* ")"
+	type_list   -> type ("," type)*
 
-In Orange, variables are mutable named values. They can be made immutable if their type is `const data_type`.
+In Orange, variables are mutable named values. They can be made immutable if the variable is prefixed with "const".
 
 Variables are a type of `lvalue`, which means that they are valid on the left-hand side of an expression that assigns. The list of expressions that require an l-value operate similary to the ones that do not:
 
@@ -56,21 +59,27 @@ Variables are a type of `lvalue`, which means that they are valid on the left-ha
 
 Some example of creating variables are:
 
-    int aNumber = 953
-    float some_float = 53.2
-    uint32 aHexNum = 0xDEADBEEFu32
-	var a_variable = 0b1111000011111u16
+	var aNumber: int = 953
+	var some_float: float = 53.2
+	var aHexNum: uint32 = 0xDEADBEEFu32
+	var a_variable = 0b111100001111u16
 
-If a variable in Orange is given an initial value, the typename may be omitted and replaced with `var`.
+If a variable in Orange is given an initial value, specifying a typename may be omitted.
 
 Using the previous example, `var aNumber = 953` is valid but `var aNumber` is not, since the latter does not have an initial value, and Orange can't determine the type of aNumber.
+
+Note that you can declare multiple variables with the same statement. If you wish to give these initial value to the statement, you must supply an initial value to each variable declared. This can be done by passing in a [tuple](collections.md#tuples) as the initial value.
+
+	var a, b: int, float = (54, 72.98f)
+	// or
+	var a, b = (54, 72.98f)
 
 ### Shadowing Variables
 
 A variable can be redefined with a new type at any point:
 
-    int myVariable = 3
-    float myVariable = 2.1
+	var myVariable: int = 3
+	var myVariable: float = 2.1
     // any reference to myVariable now uses the redefined float
 
 Unlike the C-family of languages, shadowing variables is perfectly valid in the original scope that the shadowed variable is declared.

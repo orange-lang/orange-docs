@@ -16,7 +16,7 @@ A list of values in Orange can be created by appending an array-specifier to the
 
 Assigning an initial list of values to an array variable is also done using the square-bracket syntax:
 
-    int[5] myList = [0, 1, 2, 3, 4]
+    var myList: int[5] = [0, 1, 2, 3, 4]
     // or
     var myList = [0, 1, 2, 3, 4]
 	var emptyList = []
@@ -56,7 +56,7 @@ It is important to note that using an array range will actually create the array
 
 A tuple is a collection of a set of values whose components may be different types. They are created by grouping values with parenthesis: `(a, b, c)`. A tuples size is not limited, but cannot be increased at runtime. Accessing members of a tuple is done using the `.` syntax:
 
-    (string, int) tuple = ("dog", 2016)
+    var tuple: (string, int) = ("dog", 2016)
     // tuple.0 == "dog"
     // tuple.1 == 2016
 
@@ -76,9 +76,7 @@ Tuples may have named elements, which can be used as substitute for using offset
 
 ### Deconstructing Tuples
 
-	var_decl        -> tuple_type "(" name ("," name)* ","? ")"
 	temp_tuple_elem -> "_"
-
 	expression      -> temp_tuple_elem
 
 Tuples, like variables, are also lvalues. They can appear on the lefthand side of an assignment operation. Note that when used as an lvalue, each of the tuples components must also be lvalues. Using them as lvalues will deconstruct the tuple:
@@ -96,3 +94,8 @@ Using tuples stored into a variable can also be used as an lvalue:
 	rover += (_, 1)
 	// rover.name == "Rover"
 	// rover.age == 5
+
+Specifying the types of multiple components in a variable declaration should not be wrapped in parenthesis:
+
+    var (a, b): int, float // Good! a is int, b is float
+    var (a, b): (int, float) // Bad! a is (int, float), b cannot be determined

@@ -17,9 +17,9 @@ A class is essentially a named tuple that supports methods. An example class cal
     }
 
     class Pet {
-        public Species species
-        public string name
-        public int age
+        public var species: Species
+        public var name: string
+        public var age: int
     }
 
 An instance of `Pet` has to be created by calling `Pet` like a method, which calls `Pet`'s _constructor_ (see Methods for creating new constructors).
@@ -42,8 +42,8 @@ Classes in the same compilation unit can be marked as partial to spread out the 
     }
 
     partial class Pet {
-        private int age
-        Pet(int age) { this.age = age }
+        private var age: int
+        Pet(var age: int) { this.age = age }
     }
 
 If using partial classes, all class fragments must be marked as partial. Each partial fragment is allowed to define more members for that class.

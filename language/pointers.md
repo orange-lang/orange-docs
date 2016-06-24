@@ -24,17 +24,17 @@ Note that with arrays, `int[5]*` is a pointer to five integers, and `int*[5]` is
 
 You can use `*` and `&` to dereference a pointer or get a reference to one. For example, to store `5` in the memory location pointed by `ourPointer`:
 
-    int* ourPointer = new int;
+    var ourPointer: int* = new int;
     *ourPointer = 5;
 
 Or to get a memory reference to a stack variable (i.e., a variable that is not created on the heap via `new`):
 
-    int a = 5;
+    var a: int = 5;
     int* ptr = &a;
 
 Memory allocated in the heap via the `new` keyword can be deleted by using the `delete` keyword.
 
-    int* ptr = new int;
+    var ptr: int* = new int;
     delete ptr;
 
 Unlike in C, we don't use `->` to access class members of a pointer to a class. `.` is always used and Orange will intelligentally dereference the pointer as needed.

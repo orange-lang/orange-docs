@@ -15,7 +15,7 @@ To catch an exception, the exception to catch must be in a `try` block:
 
     try {
        // code which may throw an exception
-    } catch (exceptionType ex) {
+    } catch (var ex: ExceptionType) {
        // use exception to print an error
     } finally {
 	   // code that runs after the try or catch

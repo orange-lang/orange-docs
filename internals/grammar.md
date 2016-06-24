@@ -13,7 +13,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	type                 -> tuple_type | array_type | pointer_type | func_type
 	type                 -> INT | UINT | INT8 | INT16 | INT32 | INT64
 	type                 -> UINT8 | UINT16 | UINT32 | UINT64
-	type                 -> FLOAT | DOUBLE | VAR | VOID | full_id | ref_type
+	type                 -> FLOAT | DOUBLE | VOID | full_id | ref_type
 
 	identifier           -> namespace_id | operator_id
 	full_id              -> IDENTIFIER full_id'
@@ -63,8 +63,12 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	unary_expr           -> post_decrement | deference | reference | not_expr
 	unary_expr           -> negate_expr
 
-	var_decl             -> type variable_name opt_size opt_value
-	opt_size             -> COLON expression | %epsilon
+	var_decl             -> opt_const VAR identifiers opt_type_spec opt_value
+	opt_const            -> CONST | %epsilon
+	identifiers          -> identifier | OPEN_PAREN identifer_list CLOSE_PAREN
+	identifier_list      -> identifier identifier_list'
+	identifier_list'     -> COMMA identifier_list | %epsilon
+	opt_type_spec        -> COLON type_list | %epsilon
 	opt_value            -> ASSIGN expression | %epsilon
 
 	pre_increment        -> INCREMENT expression

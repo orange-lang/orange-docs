@@ -10,7 +10,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	type                 -> tuple_type | array_type | pointer_type | func_type
 	type                 -> "int" | "uint" | "int8" | "int16" | "int32"
 	type                 -> "int64" | "uint8" | "uint16" | "uint32"
-	type                 -> "uint64" | "float" | "double" | "var" | "void"
+	type                 -> "uint64" | "float" | "double" | "void"
 	type                 -> identifier | ref_type
 
 	identifier           -> "_"? ( alphas | "_" ) ( alphanumerics | "_" )*
@@ -61,8 +61,9 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	unary_expr           -> post_decrement | deference | reference | not_expr
 	unary_expr           -> negate_expr
 
-	var_decl             -> type variable_name (":" expression)?
+	var_decl             -> "const"? "var" identifiers (":" type_list)?
 	                        ( "=" expression )?
+	identifiers          -> identifier | "(" identifier ("," identifier)* ")"
 
 	addition             -> expression "+" expression
 	subtraction          -> expression "-" expression
@@ -165,7 +166,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	yield_stmt           -> "yield" expression
 
     func_type            -> "(" type_list? ")" "->" type
-    type_list            -> type (COMMA type)*
+    type_list            -> type ("," type)*
 
     function             -> flags? "def" fn_name? generics? "(" param_list? ")"
 	                        ("->" type)? block
