@@ -76,6 +76,7 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	LEQ                -> "<="
 	GEQ                -> ">="
 	NEQ                -> "!="
+	NOT                -> "!"
 	AND                -> "&&"
 	OR                 -> "||"
 	INCREMENT          -> "++"

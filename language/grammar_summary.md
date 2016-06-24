@@ -58,7 +58,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	binop_expr           -> not_equal | equal | boolean_and | boolean_or
 
 	unary_expr           -> pre_increment | post_increment | pre_decrement
-	unary_expr           -> post_decrement | deference | reference
+	unary_expr           -> post_decrement | deference | reference | not_expr
 
 	var_decl             -> type variable_name (":" expression)?
 	                        ( "=" expression )?
@@ -102,6 +102,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	post_decrement       -> expression "--"
 	deference            -> "*" expression
 	reference            -> "&" expression
+	not_expr             -> "!" expression
 
 	type_cast            -> "(" type ")" expression
 
