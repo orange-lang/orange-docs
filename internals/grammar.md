@@ -29,7 +29,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	statement            -> yield_stmt | function | aggregate | struct
 	statement            -> extern_fn
 	statement            -> interface | destructor | namespace
-	statement            -> import
+	statement            -> import | extension
 	statement            -> getter | setter | property | enum | expr_statement
 
 	expr_statement       -> expresssion expr_statement'
@@ -220,6 +220,8 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	getter               -> GET block
 	setter               -> SET block
+
+	extension            -> EXTEND identifier opt_supers block
 
 	property             -> flags property_base | property_base
 	property_base        -> identifier opt_func_type block

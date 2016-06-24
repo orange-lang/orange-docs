@@ -29,7 +29,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	statement            -> yield_stmt | function | aggregate | struct
 	statement            -> extern_fn
 	statement            -> interface | destructor | namespace
-	statement            -> import
+	statement            -> import | extension
 	statement            -> getter | setter | property | enum | expr_statement
 
 	expr_statement       -> expression ";"?
@@ -206,5 +206,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	getter               -> "get" block
 	setter               -> "set" block
+
+	extension            -> "extend" identifier (":" super_list)? block
 
 	property             -> flags? "property" identifier "->" type block

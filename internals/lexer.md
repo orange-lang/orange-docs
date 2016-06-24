@@ -126,3 +126,4 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	STRUCT             -> "struct"
 	WHERE              -> "where"
 	DATA               -> "data"
+	EXTEND             -> "extend"
