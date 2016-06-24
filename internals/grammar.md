@@ -37,8 +37,8 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	expr_statement'      -> SEMICOLON | %epsilon
 
 	expression           -> binop_expr | unary_expr | value | control
-	expression           -> access_tuple | named_expr | temp_tuple_elem
-	expression           -> fn_call | new | delete | member_access | THIS
+	expression           -> named_expr | temp_tuple_elem
+	expression           -> fn_call | new | delete | THIS
 	expression           -> OPEN_PAREN expression CLOSE_PAREN | ternary
 	expression           -> type_cast | identifier
 
@@ -211,7 +211,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	constraints          -> constraint constraints'
 	constraints'         -> COMMA constraints | %epsilon
 	constraint           -> WHERE IDENTIFIER ASSIGN type_constraint
-	type_constraint      -> CLASS | NEW OPEN_PARNE CLOSE_PAREN
+	type_constraint      -> CLASS | NEW OPEN_PAREN CLOSE_PAREN
 	type_constraint      -> identifier | DATA type | type
 
     aggregate            -> AGGREGATE opt_name block
