@@ -89,6 +89,8 @@ For the following example, pretend a `println` is defined that will print a line
 
 Any code before a function will be ran before that function executes. Likewise, any code after a function will run after that function's return statement is called.
 
+Aggregate functions are made of three parts: the header, body, and footer. The header and footer support any kind of executable statement or expression, but cannot declare new functions. The body can only declare functions. When the first function is declared, the aggregates body begins. The first statement after the final body function begins the footer.
+
 Aggregate blocks also define a `value` which represent the return value of the functions. Using `value`, we can replace the previous example with the much simpler code:
 
     aggregate {
@@ -110,7 +112,7 @@ Aggregate blocks also define a `value` which represent the return value of the f
 
 Note that although aggregate blocks support the one-line block syntax, it's pointless in the context of an aggregate, since aggregate statements are only called when a function declared inside an aggregate is called.
 
-Aggregates can also be named, which is only used for extensions. 
+Aggregates can also be named, which is only used for extensions.
 
 ## Calling C functions
 
