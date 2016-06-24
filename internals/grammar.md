@@ -15,10 +15,11 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	type                 -> UINT8 | UINT16 | UINT32 | UINT64
 	type                 -> FLOAT | DOUBLE | VAR | VOID | full_id | ref_type
 
-	identifier           -> namespace_id | operator_id
+	identifier           -> full_id | operator_id | dtor_id
 	full_id              -> IDENTIFIER full_id'
 	full_id'             -> DOT identifier | %epsilon
 	operator_id          -> OPERATOR operator
+	dtor_id              -> TILDE IDENTIFIER
 
 	long_block           -> OPEN_CURLY opt_statements CLOSE_CURLY
 	short_block          -> COLON statement
