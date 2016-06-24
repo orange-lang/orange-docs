@@ -15,10 +15,10 @@ If you wish to create a new instance of any type on the heap, resulting in a poi
 
     new TypeName
 
-For our `int*` example, that would be `int* ourPointer = new int;`
+For our `int*` example, that would be `var ourPointer: int* = new int;`
 
-You can couple this with a constructor: `Polly* p = new Pet(Species.Parrot, "Polly", 1);`
-or you can couple it with a size to instantiate an array: `int[5]* a = new int[5];`
+You can couple this with a constructor: `var p: Polly* = new Pet(Species.Parrot, "Polly", 1);`
+or you can couple it with a size to instantiate an array: `var a int[5]* = new int[5];`
 
 Note that with arrays, `int[5]*` is a pointer to five integers, and `int*[5]` is an array of 5 pointers (and `int*[5]*` is a pointer to an array of 5 pointers).
 
