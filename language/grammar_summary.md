@@ -33,6 +33,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	statement            -> interface | destructor | namespace
 	statement            -> import | extension
 	statement            -> getter | setter | property | enum | expr_statement
+	statement            -> try_block | throw_stmt
 
 	expr_statement       -> expression ";"?
 
@@ -221,3 +222,8 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	extension            -> "extend" identifier (":" super_list)? block
 
 	property             -> flags? "property" identifier "->" type block
+
+	try_block            -> "try" block catch_block+ finally_block?
+	catch_block          -> "catch" "(" implicit_var ")" block
+	finally_block        -> "finally" block
+	throw_stmt           -> "throw" expression

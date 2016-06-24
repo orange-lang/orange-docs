@@ -128,3 +128,7 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	DATA               -> "data"
 	EXTEND             -> "extend"
 	CONST              -> "const"
+	TRY                -> "try"
+	CATCH              -> "catch"
+	FINALLY            -> "finally"
+	THROW              -> "throw"

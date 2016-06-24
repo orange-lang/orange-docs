@@ -32,6 +32,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	statement            -> interface | destructor | namespace
 	statement            -> import | extension
 	statement            -> getter | setter | property | enum | expr_statement
+	statement            -> try_block 
 
 	expr_statement       -> expresssion expr_statement'
 	expr_statement'      -> SEMICOLON | %epsilon
@@ -240,3 +241,12 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	property             -> flags property_base | property_base
 	property_base        -> identifier opt_func_type block
+
+	try_block            -> TRY block opt_catch_blocks opt_finally_block
+	opt_catch_blocks     -> catch_blocks | %epsilon
+	catch_blocks         -> catch_block catch_blocks'
+	catch_blocks'        -> catch_blocks | %epsilon
+	catch_block          -> CATCH OPEN_PAREN implicit_var CLOSE_PAREN block
+	opt_finally_block    -> finally_block | %epsilon
+	finally_block        -> FINALLY block
+	throw_stmt           -> THROW expression
