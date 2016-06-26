@@ -72,7 +72,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 
 	unary_expr           -> pre_increment | post_increment | pre_decrement
 	unary_expr           -> post_decrement | deference | reference | not_expr
-	unary_expr           -> negate_expr
+	unary_expr           -> negate_expr | bitwise_not
 
 	var_decl             -> opt_const VAR identifiers opt_type_spec_list
 	                        opt_value
@@ -90,6 +90,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 	deference            -> TIMES expression
 	reference            -> BIT_AND expression
 	not_expr             -> NOT expression
+	bitwise_not          -> TILDE expression
 	negate_expr          -> MINUS expression
 
 	type_cast            -> OPEN_PAREN type CLOSE_PAREN expression

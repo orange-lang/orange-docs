@@ -65,7 +65,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 
 	unary_expr           -> pre_increment | post_increment | pre_decrement
 	unary_expr           -> post_decrement | deference | reference | not_expr
-	unary_expr           -> negate_expr
+	unary_expr           -> negate_expr | bitwise_not
 
 	var_decl             -> "const"? "var" identifiers (":" type_list)?
 	                        ( "=" expression )?
@@ -111,6 +111,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	deference            -> "*" expression
 	reference            -> "&" expression
 	not_expr             -> "!" expression
+	bitwise_not          -> "~" expression
 	negate_expr          -> "-" expression
 
 	type_cast            -> "(" type ")" expression
