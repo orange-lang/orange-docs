@@ -55,4 +55,5 @@
   * [Grammar Summary](language/grammar_summary.md)
 * [Compiler Internals](internals/README.md)
   * [Lexer Tokens](internals/lexer.md)
+  * [Operator Precedence](internals/precedence.md)
   * [Parser Grammar](internals/grammar.md)
