@@ -21,7 +21,7 @@ block                -> long_block | short_block
 
 type                 -> tuple_type | array_type | pointer_type | func_type
 type                 -> INT | UINT | INT8 | INT16 | INT32 | INT64
-type                 -> UINT8 | UINT16 | UINT32 | UINT64
+type                 -> UINT8 | UINT16 | UINT32 | UINT64 | CHAR
 type                 -> FLOAT | DOUBLE | VAR | VOID | named_id | ref_type
 
 array_type           -> type OPEN_BRACKET expression CLOSE_BRACKET
@@ -186,7 +186,7 @@ value                -> tuple_expr | constant_val | THIS | control | new
 constant_val         -> VAL_INT | VAL_INT8 | VAL_INT16 | VAL_INT32
 constant_val         -> VAL_INT64 | VAL_UINT | VAL_UINT8 | VAL_UINT16
 constant_val         -> VAL_UINT32 | VAL_UINT64 | VAL_FLOAT | VAL_DOUBLE
-constant_val         -> VAL_STRING
+constant_val         -> VAL_STRING | VAL_CHARACTER
 
 control              -> if | for_loop | foreach | while | forever | do_while
 control              -> switch | try_block

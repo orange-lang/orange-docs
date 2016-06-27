@@ -27,8 +27,11 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 
 	STRING             -> \"(\\.|[^\\"])*\"
 
+	CHARACTER          -> \'(\\.|[^\\'])?\'
+
 	NEWLINE            -> "\n"
 	SEMICOLON          -> ";"
+	CHAR               -> "char"
 	INT                -> "int"
 	UINT               -> "uint"
 	INT8               -> "int8"

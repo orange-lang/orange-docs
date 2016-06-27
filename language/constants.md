@@ -1,6 +1,6 @@
 # Constants
 
-Orange has three types of constants: floating-point, integral, and strings.
+Orange has four types of constants: floating-point, integral, strings, and chars.
 
 	value      -> ( "0" ... "9" | "A" ... "F" )+
 	expression -> integral_const | float_const | string_const
@@ -14,6 +14,7 @@ Orange has three types of constants: floating-point, integral, and strings.
 	fsuffix     -> "f" | "d"
 
 	string_const -> "\"" string_content "\""
+	char_const -> "'" character "'"
 
 When writing an integral const, the prefixes `0b`, `0o`, and `0x` refer to a binary, octal, and hexadecimal constant respectively. If the prefix is omitted, the constant defaults to a decimal. Note that when specifying binary, octal, or hexadecimal, you can only use numbers valid for that base for the value.
 
@@ -52,4 +53,4 @@ Each of the suffixes from both integral and floating-point constants correspond 
 - `f`: `float`
 - `d`: `double`
 
-Strings can neither be prefixed nor suffixed. They must begin and end with double quotes, but double qoutes can be contained inside the string if they are escaped using a `\`.
+Strings and chars can neither be prefixed nor suffixed. They must begin and end with double quotes, but double qoutes can be contained inside the string if they are escaped using a `\`.
