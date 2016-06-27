@@ -57,3 +57,5 @@
   * [Lexer Tokens](internals/lexer.md)
   * [Operator Precedence](internals/precedence.md)
   * [Parser Grammar](internals/grammar.md)
+  * [Library Format](internals/libraries.md)
+  * [Compiler Extensions](internals/extensions.md)
