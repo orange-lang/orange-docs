@@ -173,9 +173,9 @@ unary                -> INCREMENT unary | DECREMENT unary | MINUS unary |
 						TIMES unary | BIT_AND unary | values
 
 values               -> fn_call | array_access_expr | values INCREMENT |
-                        values DECREMENT | dot
+                        values DECREMENT | dot | primary
 
-dot                  -> primary DOT dot | primary
+dot                  -> values DOT identifier 
 
 primary              -> value | OPEN_PAREN expression CLOSE_PAREN
 
