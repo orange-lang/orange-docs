@@ -34,22 +34,15 @@ pointer_type         -> type TIMES
 func_type            -> OPEN_PAREN opt_type_list CLOSE_PAREN ARROW type
 ref_type             -> type BIT_AND
 id_type              -> id_path_type opt_id_ty_access
-opt_id_ty_access     -> DOT base_identifier | %epsilon
+opt_id_ty_access     -> DOT base_id_type | %epsilon
 
 id_path_type         -> basic_type | id_type opt_generic_spec
 opt_generic_spec     -> generic_spec | %epsilon
 generic_spec         -> LESS_THAN OF type_list GREATER_THAN
 
-base_identifier      -> IDENTIFIER | operator_id | dtor_id
+base_id_type         -> IDENTIFIER | operator_id | dtor_id
 operator_id          -> OPERATOR operator
 dtor_id              -> TILDE IDENTIFIER
-
-identifier           -> identifier_base opt_generic_spec
-identifier_base      -> IDENTIFIER | TILDE IDENTIFIER
-
-full_identifier      -> full_id_base opt_full_id_access
-opt_full_id_accesss  -> DOT identifier_base
-full_id_base         -> IDENTIFIER | full_identifier opt_generic_spec
 
 /* Allows for a list of types with a trailing comma */
 tuple_types          -> type tuple_types'
@@ -60,6 +53,17 @@ tuple_types''        -> tuple_types | %epsilon
 opt_type_list        -> type_list | %epsilon
 type_list            -> type type_list'
 type_list'           -> COMMA type_list | %epsilon
+
+/*
+** Identifiers
+*/
+
+identifier           -> identifier_base opt_generic_spec
+identifier_base      -> IDENTIFIER | TILDE IDENTIFIER
+
+full_identifier      -> full_id_base opt_full_id_access
+opt_full_id_accesss  -> DOT identifier_base
+full_id_base         -> IDENTIFIER | full_identifier opt_generic_spec
 
 /*
 ** Statements
