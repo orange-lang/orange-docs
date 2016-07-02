@@ -47,6 +47,10 @@ dtor_id              -> TILDE IDENTIFIER
 identifier           -> identifier_base opt_generic_spec
 identifier_base      -> IDENTIFIER | TILDE IDENTIFIER
 
+full_identifier      -> full_id_base opt_full_id_access
+opt_full_id_accesss  -> DOT identifier_base
+full_id_base         -> IDENTIFIER | full_identifier opt_generic_spec
+
 /* Allows for a list of types with a trailing comma */
 tuple_types          -> type tuple_types'
 tuple_types'         -> COMMA tuple_types''
@@ -87,12 +91,11 @@ enum_values          -> enum_value enum_values'
 enum_values'         -> COMMA enum_values
 enum_value           -> IDENTIFIER opt_enum_params
 opt_enum_params      -> OPEN_PAREN param_list CLOSE_PAREN | %epsilon
-enum_patterm         -> identifier OPEN_PAREN arg_list CLOSE_PAREN
 
 class                -> flags base_class | base_class
 base_class           -> CLASS IDENTIFIER opt_supers class_body
 opt_supers           -> COLON super_list | %epsilon
-super_list           -> identifier super_list'
+super_list           -> full_identifier super_list'
 super_list'          -> COMMA super_list
 partial_class        -> flags PARTIAL base_class
 
@@ -125,11 +128,11 @@ aggregate            -> AGGREGATE opt_name block
 
 interface            -> INTERFACE IDENTIFIER block
 
-namespace            -> NAMESPACE identifier opt_block
+namespace            -> NAMESPACE full_identifier opt_block
 opt_block            -> block | %epsilon
-import               -> IMPORT identifier
+import               -> IMPORT full_identifier
 
-extension            -> EXTEND identifier opt_supers block
+extension            -> EXTEND full_identifier opt_supers block
 
 property             -> flags property_base | property_base
 property_base        -> IDENTIFIER opt_func_type block
@@ -270,9 +273,9 @@ constraints          -> constraint constraints'
 constraints'         -> COMMA constraints | %epsilon
 constraint           -> WHERE IDENTIFIER ASSIGN type_constraint
 type_constraint      -> CLASS | NEW OPEN_PAREN CLOSE_PAREN
-type_constraint      -> identifier | DATA type | type
+type_constraint      -> full_identifier | DATA type | type
 
-new                  -> NEW identifier
+new                  -> NEW full_identifier
 delete               -> DELETE expression
 
 flags                -> flag flags'
