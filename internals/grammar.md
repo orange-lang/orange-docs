@@ -19,36 +19,43 @@ block                -> long_block | short_block
 ** Types
 */
 
-type                 -> tuple_type | array_type | pointer_type | func_type
-type                 -> INT | UINT | INT8 | INT16 | INT32 | INT64
-type                 -> UINT8 | UINT16 | UINT32 | UINT64 | CHAR
-type                 -> FLOAT | DOUBLE | VAR | VOID | named_id | ref_type
+type                 -> basic_type | complex_type
 
-array_type           -> type OPEN_BRACKET expression CLOSE_BRACKET
+basic_type           -> INT | INT8 | INT16 | INT32 | INT64
+basic_type           -> UINT | UINT8 | UINT16 | UINT32 | UINT64
+basic_type           -> CHAR | FLOAT | DOUBLE | VAR | VOID
+
+complex_type         -> tuple_type | array_type | pointer_type | func_type
+complex_type         -> ref_type | id_type
+
 tuple_type           -> OPEN_PAREN tuple_types CLOSE_PAREN
-func_type            -> OPEN_PAREN opt_type_list CLOSE_PAREN ARROW type
+array_type           -> type OPEN_BRACKET expression CLOSE_BRACKET
 pointer_type         -> type TIMES
+func_type            -> OPEN_PAREN opt_type_list CLOSE_PAREN ARROW type
 ref_type             -> type BIT_AND
+id_type              -> id_path_type opt_id_ty_access
+opt_id_ty_access     -> DOT base_identifier | %epsilon
+
+id_path_type         -> basic_type | id_type opt_generic_spec
+opt_generic_spec     -> generic_spec | %epsilon
+generic_spec         -> LESS_THAN OF type_list GREATER_THAN
+
+base_identifier      -> IDENTIFIER | operator_id | dtor_id
+operator_id          -> OPERATOR operator
+dtor_id              -> TILDE IDENTIFIER
+
+identifier           -> identifier_base opt_generic_spec
+identifier_base      -> IDENTIFIER | TILDE IDENTIFIER
 
 /* Allows for a list of types with a trailing comma */
-types                -> type types'
-types'               -> COMMA types''
-types''              -> types | %epsilon
+tuple_types          -> type tuple_types'
+tuple_types'         -> COMMA tuple_types''
+tuple_types''        -> tuple_types | %epsilon
 
 /* Allows for a list of types with no trailing comma */
 opt_type_list        -> type_list | %epsilon
 type_list            -> type type_list'
 type_list'           -> COMMA type_list | %epsilon
-
-identifier           -> operator_id | named_id
-named_id             -> id_types opt_generic_spec
-opt_generic_spec     -> generic_spec | %epsilon
-generic_spec         -> LESS_THAN OF type_list GREATER_THAN
-id_types             -> full_id | dtor_id
-full_id              -> IDENTIFIER full_id'
-full_id'             -> DOT identifier | %epsilon
-operator_id          -> OPERATOR operator
-dtor_id              -> TILDE IDENTIFIER
 
 /*
 ** Statements
@@ -66,26 +73,26 @@ statement            -> delete
 var_decl             -> opt_const VAR identifiers opt_type_spec_list
                         opt_value
 opt_const            -> CONST | %epsilon
-identifiers          -> named_id | OPEN_PAREN identifer_list CLOSE_PAREN
-identifier_list      -> named_id identifier_list'
+identifiers          -> identifier | OPEN_PAREN identifer_list CLOSE_PAREN
+identifier_list      -> identifier identifier_list'
 identifier_list'     -> COMMA identifier_list | %epsilon
 opt_type_spec_list   -> COLON type_list | %epsilon
 opt_value            -> ASSIGN expression | %epsilon
 
 enum                 -> flags enum_base | enum_base
-enum_base            -> ENUM named_id OPEN_CURLY opt_enum_values
+enum_base            -> ENUM identifier OPEN_CURLY opt_enum_values
                         CLOSE_CURLY
 opt_enum_values      -> enum_values | %epsilon
 enum_values          -> enum_value enum_values'
 enum_values'         -> COMMA enum_values
 enum_value           -> IDENTIFIER opt_enum_params
 opt_enum_params      -> OPEN_PAREN param_list CLOSE_PAREN | %epsilon
-enum_patterm         -> named_id OPEN_PAREN arg_list CLOSE_PAREN
+enum_patterm         -> identifier OPEN_PAREN arg_list CLOSE_PAREN
 
 class                -> flags base_class | base_class
 base_class           -> CLASS IDENTIFIER opt_supers class_body
 opt_supers           -> COLON super_list | %epsilon
-super_list           -> named_id super_list'
+super_list           -> identifier super_list'
 super_list'          -> COMMA super_list
 partial_class        -> flags PARTIAL base_class
 
@@ -118,11 +125,11 @@ aggregate            -> AGGREGATE opt_name block
 
 interface            -> INTERFACE IDENTIFIER block
 
-namespace            -> NAMESPACE named_id opt_block
+namespace            -> NAMESPACE identifier opt_block
 opt_block            -> block | %epsilon
-import               -> IMPORT named_id
+import               -> IMPORT identifier
 
-extension            -> EXTEND named_id opt_supers block
+extension            -> EXTEND identifier opt_supers block
 
 property             -> flags property_base | property_base
 property_base        -> IDENTIFIER opt_func_type block
@@ -263,9 +270,9 @@ constraints          -> constraint constraints'
 constraints'         -> COMMA constraints | %epsilon
 constraint           -> WHERE IDENTIFIER ASSIGN type_constraint
 type_constraint      -> CLASS | NEW OPEN_PAREN CLOSE_PAREN
-type_constraint      -> named_id | DATA type | type
+type_constraint      -> identifier | DATA type | type
 
-new                  -> NEW named_id
+new                  -> NEW identifier
 delete               -> DELETE expression
 
 flags                -> flag flags'
