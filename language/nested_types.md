@@ -12,3 +12,5 @@ For example:
     }
 
     Run.RunType ty = Run.RunType.TEST
+
+This also applies to nested namespaces; a namespace `NamespaceB` inside namespace `NamespaceA`'s full path is `NamespaceA.NamespaceB`. 
