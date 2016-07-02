@@ -7,7 +7,7 @@ program              -> opt_statements
 
 opt_statements       -> statements | %epsilon
 statements           -> statement statements'
-statements'          -> TERM statement | %epsilon
+statements'          -> TERM statements | %epsilon
 
 term                 -> SEMICOLON | NEWLINE
 
@@ -175,7 +175,7 @@ unary                -> INCREMENT unary | DECREMENT unary | MINUS unary |
 values               -> fn_call | array_access_expr | values INCREMENT |
                         values DECREMENT | dot | primary
 
-dot                  -> values DOT identifier 
+dot                  -> values DOT identifier
 
 primary              -> value | OPEN_PAREN expression CLOSE_PAREN
 
