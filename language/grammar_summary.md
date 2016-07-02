@@ -114,7 +114,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	bitwise_not          -> "~" expression
 	negate_expr          -> "-" expression
 
-	type_cast            -> "(" type ")" expression
+	type_cast            -> expression "as" type
 
 	enum                 -> flags? "enum" identifier "{" enum_values? "}"
 	enum_values          -> enum_value ("," enum_value)*

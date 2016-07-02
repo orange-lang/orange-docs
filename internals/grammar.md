@@ -191,7 +191,7 @@ constant_val         -> VAL_STRING | VAL_CHARACTER
 control              -> if | for_loop | foreach | while | forever | do_while
 control              -> switch | try_block
 
-type_cast            -> OPEN_PAREN type CLOSE_PAREN expression
+type_cast            -> expression AS type
 
 array_expression     -> OPEN_BRACKET opt_arr_elements CLOSE_BRACKET
 opt_arr_elements     -> arr_elements | %epsilon

@@ -136,3 +136,4 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	FINALLY            -> "finally"
 	THROW              -> "throw"
 	OF                 -> "of"
+	AS                 -> "as"
