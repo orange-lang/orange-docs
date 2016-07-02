@@ -6,7 +6,7 @@ This file outlines the BNF grammar that Orange will use for its parser. It is a 
 program              -> opt_statements
 
 opt_statements       -> statements | %epsilon
-statements           -> statement statements'
+statements           -> statement statements' | COMMENT statements
 statements'          -> TERM statements | %epsilon
 
 term                 -> SEMICOLON | NEWLINE
