@@ -139,7 +139,7 @@ import               -> IMPORT full_identifier
 extension            -> EXTEND full_identifier opt_supers block
 
 property             -> flags property_base | property_base
-property_base        -> IDENTIFIER opt_func_type block
+property_base        -> PROPERTY IDENTIFIER opt_func_type block
 
 expr_statement       -> expresssion expr_statement'
 expr_statement'      -> SEMICOLON | %epsilon

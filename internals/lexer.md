@@ -137,3 +137,4 @@ are regex. The RHS of a production can derive another nonterminal when that nont
 	THROW              -> "throw"
 	OF                 -> "of"
 	AS                 -> "as"
+	PROPERTY           -> "property"
