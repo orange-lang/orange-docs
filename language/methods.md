@@ -70,7 +70,7 @@ An operator is overloaded just like declaring a function, but the name of the fu
 
         public def value(): mInternal
 
-        public Number(val: int): mInternal = val;
+        public def Number(val: int): mInternal = val;
 
         public def operator+(other: Number) -> Number:
             Number(mInternal + other.mInternal)

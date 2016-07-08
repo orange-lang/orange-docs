@@ -23,12 +23,12 @@ Properties are methods that are used like regular members. They can be defined i
 			get: name
         }
 
-        public Age -> int {
+        public property Age -> int {
 			get: age
 			set: age = value
         }
 
-        public Pet(species: Species, name: string, age: int) {
+        public def Pet(species: Species, name: string, age: int) {
             this.species = species
             this.name = name
             this.age = age

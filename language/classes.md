@@ -47,12 +47,12 @@ Also, the statements that are syntatically valid inside of a class are different
 Classes in the same compilation unit can be marked as partial to spread out the implementation and definition of a class across multiple files. It's as easy as prefixing the class definition with `partial`.
 
     partial class Pet {
-        public string sayHello() { println("Hello! I am {age} years old.") }
+        public def sayHello(): println("Hello! I am {age} years old.")
     }
 
     partial class Pet {
         private age: int
-        Pet(age: int) { this.age = age }
+        def Pet(age: int) { this.age = age }
     }
 
 If using partial classes, all class fragments must be marked as partial. Each partial fragment is allowed to define more members for that class.
