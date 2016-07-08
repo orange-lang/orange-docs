@@ -108,7 +108,7 @@ opt_class_stmts      -> class_stmts | %epsilon
 class_stmts          -> class_stmt class_stmts'
 class_stmts'         -> term class_stmts | %epsilon
 
-class_stmt           -> implicit_var | class | function | aggregate
+class_stmt           -> var_decl | class | function | aggregate
 class_stmt           -> extern_fn | import | extension | property
 class_stmt           -> enum
 

@@ -8,7 +8,7 @@
 	class_body    -> "{" class_stmts? "}"
 	class_stmts   -> class_stmt (term class_stmt)*
 
-	class_stmt    -> implicit_var | class | function | aggregate
+	class_stmt    -> var_decl | class | function | aggregate
 	class_stmt    -> extern_fn | import | extension | property
 	class_stmt    -> enum
 
@@ -24,9 +24,9 @@ A class is essentially a named tuple that supports methods. An example class cal
     }
 
     class Pet {
-        public species: Species
-        public name: string
-        public age: int
+        public var species: Species
+        public var name: string
+        public var age: int
     }
 
 An instance of `Pet` has to be created by calling `Pet` like a method, which calls `Pet`'s _constructor_ (see Methods for creating new constructors).
@@ -51,7 +51,7 @@ Classes in the same compilation unit can be marked as partial to spread out the 
     }
 
     partial class Pet {
-        private age: int
+        private var age: int
         def Pet(age: int) { this.age = age }
     }
 

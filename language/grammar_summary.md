@@ -131,7 +131,7 @@ This is a compilation of the various bits of grammar defined throughout this doc
 	class_body           -> "{" class_stmts? "}"
 	class_stmts          -> class_stmt (term class_stmt)*
 
-	class_stmt           -> implicit_var | class | function | aggregate
+	class_stmt           -> var_decl | class | function | aggregate
 	class_stmt           -> extern_fn | import | extension | property
 	class_stmt           -> enum
 

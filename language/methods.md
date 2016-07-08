@@ -3,9 +3,9 @@
 A method is a function defined inside a class, and defines a function that can be used on an instance of that class.
 
     class Pet {
-        public species: Species
-        public name: name
-        public age: int
+        public var species: Species
+        public var name: name
+        public var age: int
 
         public def sayHello() {
             println("Hi, I'm {name}!")
@@ -66,7 +66,7 @@ Certain operators can be overloaded by a class to call custom behavior: `+`, `- 
 An operator is overloaded just like declaring a function, but the name of the function is `operator` followed by the name of the operator.
 
     class Number {
-        private mInternal: int
+        private var mInternal: int
 
         public def value(): mInternal
 

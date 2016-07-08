@@ -11,9 +11,9 @@ Properties are methods that are used like regular members. They can be defined i
 
 
     class Pet {
-        private species: Species
-        private name: string
-        private age: int
+        private var species: Species
+        private var name: string
+        private var age: int
 
         public property Species -> Species {
 			get: species
