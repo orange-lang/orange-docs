@@ -59,3 +59,4 @@
   * [Parser Grammar](internals/grammar.md)
   * [Library Format](internals/libraries.md)
   * [Compiler Extensions](internals/extensions.md)
+  * [Rules for Well Formed Programs](internals/well_formed.md)
