@@ -18,6 +18,10 @@ Newlines are used as the termination indicator of a statement, but they are also
 	- Before and after specifying generics for a function
 	- After a terminal that starts a declaration (`def`, `interface`, etc)
 
+### Ignored Comments
+
+Comments are added to the AST when they stand alone (e.g., are the only thing on the line). There are ignored in all other situations. 
+
 ## Types
 
 Let a _real number type_ be the class of all integers and floating point types.
@@ -235,4 +239,10 @@ Logical binary operations include the following:
 
 ## Privacy
 
-Privacy flags may only be declared on functions, declared objects, and class members. 
+- Privacy flags may only be declared on functions, declared objects, and class members.
+
+## Properties
+
+- Properties defined via a short-block must have an l-value as its expression.
+- Properties defined via a long-block must have at least a getter or setter.
+- Getters must return a value.
