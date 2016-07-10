@@ -124,36 +124,20 @@ setter               -> SET block
 ** Expressions
 */
 
-expression           -> ternary_expr | assign_expr | or_expr
+// NOTE! Precedence isn't represented here, but it should be taken into effect.
 
-ternary_expr         -> or_expr QUESTION expression COLON expression
+expression           -> ternary_expr | binop_expr | unary
 
-assign_expr          -> or_expr assign_op expression
-assign_op            -> ASSIGN | PLUS_ASSIGN | MINUS_ASSIGN |
-                        TIMES_ASSIGN | DIVIDE_ASSIGN | REMAINDER_ASSIGN |
-						SHIFT_LEFT_ASSIGN | SHIFT_RIGHT_ASSIGN |
-						BIT_OR_ASSIGN | BIT_AND_ASSIGN | BIT_XOR_ASSIGN
+ternary_expr         -> expression QUESTION expression COLON expression
 
-or_expr              -> or_expr OR and_expr | and_expr
-and_expr             -> and_expr AND bit_or_expr | bit_or_expr
-bit_or_expr          -> bit_or_expr BIT_OR bit_xor_expr | bit_xor_expr
-bit_xor_expr         -> bit_xor_expr BIT_XOR bit_and_expr | bit_and_expr
-bit_and_expr         -> bit_and_expr BIT_AND equality | equality
-
-equality             -> equality eq_op comparison | comparison
-eq_op                -> EQUALS | NEQ
-
-comparison           -> comparison comp_op shifts | shifts
-comp_op              -> LESS_THAN | GREATER_THAN | LEQ | GEQ
-
-shifts               -> shifts shift_op sums | sums
-shift_op             -> SHIFT_LEFT | SHIFT_RIGHT
-
-sums                 -> sums sum_op mult | mult
-sum_op               -> PLUS | MINUS
-
-mult                 -> mult mult_op unary | unary
-mult_op              -> TIMES | DIVIDE | REMAINDER
+binop_expr           -> expression binop expression
+binop                -> ASSIGN | PLUS_ASSIGN | MINUS_ASSIGN | TIMES_ASSIGN |
+                        DIVIDE_ASSIGN | REMAINDER_ASSIGN | SHIFT_LEFT_ASSIGN |
+                        SHIFT_RIGHT_ASSIGN | BIT_OR_ASSIGN | BIT_AND_ASSIGN |
+                        BIT_XOR_ASSIGN | OR | AND | BIT_OR | BIT_XOR | BIT_AND |
+                        EQUALS | NEQ | LESS_THAN | GREATER_THAN | LEQ | GEQ |
+                        SHIFT_LEFT | SHIFT_RIGHT | PLUS | MINUS | TIMES |
+                        DIVIDE | REMAINDER
 
 unary                -> INCREMENT unary | DECREMENT unary | MINUS unary |
                         NOT unary | TILDE unary | type_cast |
