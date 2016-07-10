@@ -1,17 +1,15 @@
 # Grammar
 
-This file outlines the BNF grammar that Orange will use for its parser. It is a simplified version of [Grammar Summary](../language/grammar_summary.md).
+This file outlines the EBNF grammar that Orange will use for its parser. It is a simplified version of [Grammar Summary](../language/grammar_summary.md).
 
 ```
-program              -> opt_statements
+program              -> statements?
 
-opt_statements       -> statements | %epsilon
-statements           -> statement statements' | COMMENT statements
-statements'          -> TERM statements | %epsilon
+statements           -> statement (TERM statement?)*
 
 term                 -> SEMICOLON | NEWLINE
 
-long_block           -> OPEN_CURLY opt_statements CLOSE_CURLY
+long_block           -> OPEN_CURLY statements? CLOSE_CURLY
 short_block          -> COLON statement
 block                -> long_block | short_block
 
@@ -31,13 +29,12 @@ complex_type         -> ref_type | id_type
 tuple_type           -> OPEN_PAREN tuple_types CLOSE_PAREN
 array_type           -> type OPEN_BRACKET expression CLOSE_BRACKET
 pointer_type         -> type TIMES
-func_type            -> OPEN_PAREN opt_type_list CLOSE_PAREN ARROW type
+func_type            -> OPEN_PAREN type_list? CLOSE_PAREN ARROW type
 ref_type             -> type BIT_AND
-id_type              -> id_path_type opt_id_ty_access
-opt_id_ty_access     -> DOT base_id_type | %epsilon
+id_type              -> id_path_type id_ty_access?
+id_ty_access         -> DOT base_id_type
 
-id_path_type         -> basic_type | id_type opt_generic_spec
-opt_generic_spec     -> generic_spec | %epsilon
+id_path_type         -> basic_type | id_type generic_spec?
 generic_spec         -> LESS_THAN OF type_list GREATER_THAN
 
 base_id_type         -> IDENTIFIER | operator_id | dtor_id
@@ -45,25 +42,21 @@ operator_id          -> OPERATOR operator
 dtor_id              -> TILDE IDENTIFIER
 
 /* Allows for a list of types with a trailing comma */
-tuple_types          -> type tuple_types'
-tuple_types'         -> COMMA tuple_types''
-tuple_types''        -> tuple_types | %epsilon
+tuple_types          -> type COMMA (type (COMMA type)*)?
 
 /* Allows for a list of types with no trailing comma */
-opt_type_list        -> type_list | %epsilon
-type_list            -> type type_list'
-type_list'           -> COMMA type_list | %epsilon
+type_list            -> type (COMMA type)*
 
 /*
 ** Identifiers
 */
 
-identifier           -> identifier_base opt_generic_spec
+identifier           -> identifier_base generic_spec?
 identifier_base      -> IDENTIFIER | TILDE IDENTIFIER
 
-full_identifier      -> full_id_base opt_full_id_access
-opt_full_id_accesss  -> DOT identifier_base
-full_id_base         -> IDENTIFIER | full_identifier opt_generic_spec
+full_identifier      -> full_id_base full_id_access?
+full_id_accesss      -> DOT identifier_base
+full_id_base         -> IDENTIFIER | full_identifier generic_spec?
 
 /*
 ** Statements
@@ -72,77 +65,57 @@ full_id_base         -> IDENTIFIER | full_identifier opt_generic_spec
 statement            -> var_decl | class | long_block
 statement            -> break_stmt | continue_stmt
 statement            -> yield_stmt | function | aggregate
-statement            -> extern_fn
-statement            -> interface | destructor | namespace
-statement            -> import | extension
-statement            -> getter | setter | property | enum | expr_statement
-statement            -> delete
+statement            -> extern_fn | interface | destructor
+statement            -> namespace | import | extension | getter
+statement            -> setter | property | enum | expr_statement
+statement            -> delete | COMMENT
 
-var_decl             -> opt_const VAR identifiers opt_type_spec_list
-                        opt_value
-opt_const            -> CONST | %epsilon
+var_decl             -> CONST? VAR identifiers (COLON type_list)?
+                        (ASSIGN expression)?
 identifiers          -> identifier | OPEN_PAREN identifer_list CLOSE_PAREN
-identifier_list      -> identifier identifier_list'
-identifier_list'     -> COMMA identifier_list | %epsilon
-opt_type_spec_list   -> COLON type_list | %epsilon
-opt_value            -> ASSIGN expression | %epsilon
+identifier_list      -> identifier (COMMA identifier)*
 
-enum                 -> flags enum_base | enum_base
-enum_base            -> ENUM identifier OPEN_CURLY opt_enum_values
+enum                 -> flags? ENUM identifier OPEN_CURLY enum_values?
                         CLOSE_CURLY
-opt_enum_values      -> enum_values | %epsilon
-enum_values          -> enum_value enum_values'
-enum_values'         -> COMMA enum_values
-enum_value           -> IDENTIFIER opt_enum_params
-opt_enum_params      -> OPEN_PAREN param_list CLOSE_PAREN | %epsilon
+enum_values          -> enum_value (COMMA enum_value)*
+enum_value           -> IDENTIFIER enum_params?
+enum_params          -> OPEN_PAREN param_list? CLOSE_PAREN
 
-class                -> flags base_class | base_class
-base_class           -> CLASS IDENTIFIER opt_supers class_body
-opt_supers           -> COLON super_list | %epsilon
-super_list           -> full_identifier super_list'
-super_list'          -> COMMA super_list
-partial_class        -> flags PARTIAL base_class
+class                -> flags? CLASS IDENTIFIER (COLON super_list)? class_body
+super_list           -> full_identifier (COMMA full_identifier)*
 
-class_body           -> OPEN_CURLY opt_class_stmts CLOSE_CURLY
-opt_class_stmts      -> class_stmts | %epsilon
-class_stmts          -> class_stmt class_stmts'
-class_stmts'         -> term class_stmts | %epsilon
+class_body           -> OPEN_CURLY class_stmts? CLOSE_CURLY
+class_stmts          -> class_stmt (term class_stmt)*
 
 class_stmt           -> var_decl | class | function | aggregate
 class_stmt           -> extern_fn | import | extension | property
 class_stmt           -> enum
 
-function             -> flags base_function | base_function
-base_function        -> DEF opt_identifier opt_generics OPEN_PAREN
-                        opt_param_list CLOSE_PAREN opt_func_type block
-opt_identifier       -> identifier | %epsilon
-opt_name             -> IDENTIFIER | %epsilon
-opt_param_list       -> param_list | %epsilon
-param_list           -> implicit_var param_list'
-param_list'          -> COMMA param_list | %epsilon
-opt_func_type        -> ARROW type | %epsilon
-extern_fn            -> flags base_extern | base_extern
-base_extern          -> EXTERN DEF IDENTIFIER OPEN_PAREN opt_param_list
+function             -> flags? DEF identifier? generics? OPEN_PAREN
+                        param_list? CLOSE_PAREN (ARROW type)? block
+param_list           -> implicit_var (COMMA implicit_var)*
+extern               -> flags? EXTERN DEF IDENTIFIER OPEN_PAREN param_list?
                         CLOSE_PAREN ARROW type
 
-implicit_var         -> opt_const identifiers opt_type_spec opt_value
-opt_type_spec        -> COLON type | %epsilon
+implicit_var         -> flags? identifiers (COLON type)? (ASSIGN expression)?
 
-aggregate            -> AGGREGATE opt_name block
+aggregate            -> AGGREGATE IDENTIFIER? block
 
-interface            -> INTERFACE IDENTIFIER block
+interface            -> INTERFACE IDENTIFIER interface_block
 
-namespace            -> NAMESPACE full_identifier opt_block
-opt_block            -> block | %epsilon
+interface_block      -> OPEN_CURLY interface_statements CLOSE_CURLY
+interface_statements -> interface_function (term interface_function)*
+interface_function   -> flags? DEF identifier? generics? OPEN_PAREN
+                        param_list? CLOSE_PAREN ARROW type
+
+namespace            -> NAMESPACE full_identifier full_block?
 import               -> IMPORT full_identifier
 
-extension            -> EXTEND full_identifier opt_supers block
+extension            -> EXTEND full_identifier supers? block
 
-property             -> flags property_base | property_base
-property_base        -> PROPERTY IDENTIFIER opt_func_type block
+property             -> flags? PROPERTY IDENTIFIER (ARROW type)? block
 
-expr_statement       -> expresssion expr_statement'
-expr_statement'      -> SEMICOLON | %epsilon
+expr_statement       -> expresssion SEMICOLON?
 
 getter               -> GET block
 setter               -> SET block
@@ -195,7 +168,7 @@ primary              -> value | OPEN_PAREN expression CLOSE_PAREN
 
 value                -> array_expression
 value                -> inclusive_range_expr | exlusive_range_expr
-value                -> tuple_expr | constant_val | THIS | control | new
+value                -> tuple_expr | constant_val | THIS | control | new | TEMP
 
 constant_val         -> VAL_INT | VAL_INT8 | VAL_INT16 | VAL_INT32
 constant_val         -> VAL_INT64 | VAL_UINT | VAL_UINT8 | VAL_UINT16
@@ -207,10 +180,8 @@ control              -> switch | try_block
 
 type_cast            -> expression AS type
 
-array_expression     -> OPEN_BRACKET opt_arr_elements CLOSE_BRACKET
-opt_arr_elements     -> arr_elements | %epsilon
-arr_elements         -> expression arr_elements'
-arr_elements'        -> COMMA arr_elements
+array_expression     -> OPEN_BRACKET arr_elements? CLOSE_BRACKET
+arr_elements         -> expression (COMMA expression)*
 
 array_access_expr    -> values OPEN_BRACKET expression CLOSE_BRACKET
 
@@ -219,11 +190,9 @@ inclusive_range_expr -> OPEN_BRACKET expression INCLUSIVE expression
 exclusive_range_expr -> OPEN_BRACKET expression EXCLUSIVE expression
                         CLOSE_BRACKET
 
-tuple_expr           -> OPEN_PAREN tuple_values opt_comma CLOSE_PAREN
-tuple_values         -> tuple_value tuple_values'
-tuple_values'        -> COMMA tuple_value
+tuple_expr           -> OPEN_PAREN tuple_values COMMA? CLOSE_PAREN
+tuple_values         -> tuple_value (COMMA tuple_value)*
 tuple_value          -> expression | named_expr
-opt_comma            -> COMMA | %epsilon
 
 named_expr           -> IDENTIFIER COLON expression
 
@@ -233,9 +202,9 @@ elif_or_else         -> ELIF OPEN_PAREN expression CLOSE_PAREN block
                         elif_or_else | else
 else                 -> ELSE block
 
-for_component        -> expression | var_decl | %epsilon
-for_loop             -> FOR OPEN_PAREN for_component SEMICOLON
-                        for_component SEMICOLON for_component CLOSE_PAREN
+for_component        -> expression | var_decl
+for_loop             -> FOR OPEN_PAREN for_component? SEMICOLON
+                        for_component? SEMICOLON for_component? CLOSE_PAREN
 						block
 foreach              -> FOREACH OPEN_PAREN var_decl IN expression
                         CLOSE_PAREN block
@@ -246,35 +215,27 @@ do_while             -> DO block WHILE OPEN_PAREN expression CLOSE_PAREN
 // NOTE: when parsing switch_pattern, function call turns into enum pattern
 switch               -> SWITCH OPEN_PAREN expression CLOSE_PAREN
                         switch_block
-switch_block         -> OPEN_CURLY opt_switch_matches CLOSE_CURLY
-opt_switch_matches   -> switch_matches | %epsilon
-switch_matches       -> switch_match switch_matches'
-switch_matches'      -> COMMA switch_matches | %epsilon
+switch_block         -> OPEN_CURLY switch_matches? CLOSE_CURLY
+switch_matches       -> switch_match (COMMA switch_matches)*
 switch_match         -> switch_patterns COLON switch_value
-switch_patterns      -> switch_pattern switch_patterns'
-switch_patterns'     -> COMMA switch_patterns
+switch_patterns      -> switch_pattern (COMMA switch_patterns)
 switch_value         -> expression | long_block
-switch_pattern       -> expression
+switch_pattern       -> IDENTIFIER enum_pattern? | TEMP
+enum_pattern         -> OPEN_PAREN enum_pattern_list? CLOSE_PAREN
+enum_pattern_list    -> IDENTIFIER (COMMA IDENTIFIER)*
 
 break_stmt           -> BREAK
 continue_stmt        -> CONTINUE
 yield_stmt           -> YIELD expression
 
-fn_call              -> values OPEN_PAREN opt_arg_list CLOSE_PAREN
-opt_arg_list         -> arg_list | %epsilon
-arg_list             -> arg arg_list'
-arg_list'            -> COMMA arg_list | %epsilon
+fn_call              -> values OPEN_PAREN arg_list? CLOSE_PAREN
+arg_list             -> arg (COMMA arg)*
 arg                  -> expression | named_expr
 
-opt_generics         -> generics | %epsilon
-generics             -> LESS_THAN opt_generic_values opt_constraints
+generics             -> LESS_THAN generic_values? constraints?
                         GREATER_THAN
-opt_generic_values   -> generic_values | %epsilon
-generic_values       -> IDENTIFIER generic_values'
-generic_values'      -> COMMA generic_values | %epsilon
-opt_constraints      -> constraints | %epsilon
-constraints          -> constraint constraints'
-constraints'         -> COMMA constraints | %epsilon
+generic_values       -> IDENTIFIER (COMMA IDENTIFIER)*
+constraints          -> constraint (COMMA constraint)*
 constraint           -> WHERE IDENTIFIER ASSIGN type_constraint
 type_constraint      -> CLASS | NEW OPEN_PAREN CLOSE_PAREN
 type_constraint      -> full_identifier | DATA type | type
@@ -282,18 +243,14 @@ type_constraint      -> full_identifier | DATA type | type
 new                  -> NEW full_identifier
 delete               -> DELETE expression
 
-flags                -> flag flags'
-flags'               -> flag flags | %epsilon
-flag                 -> privacy | virtual | PARTIAL
+flags                -> flag+
+flag                 -> privacy | virtual | PARTIAL | CONST
 virtual              -> VIRTUAL | FINAL
 privacy              -> PRIVATE | PROTECTED | PUBLIC
 
-try_block            -> TRY block opt_catch_blocks opt_finally_block
-opt_catch_blocks     -> catch_blocks | %epsilon
-catch_blocks         -> catch_block catch_blocks'
-catch_blocks'        -> catch_blocks | %epsilon
+try_block            -> TRY block catch_blocks? finally_block?
+catch_blocks         -> catch_block+
 catch_block          -> CATCH OPEN_PAREN implicit_var CLOSE_PAREN block
-opt_finally_block    -> finally_block | %epsilon
 finally_block        -> FINALLY block
 throw_stmt           -> THROW expression
 ```
