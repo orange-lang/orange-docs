@@ -157,6 +157,7 @@ Logical binary operations include the following:
 - The default constuctor exists until a custom constructor is supplied.
 - A constructor must always be the same name as the class.
 - Each "super" in the class' super list must exist.
+- A constructor for a generic class must have an assignment for each generic member.
 
 ## Arrays
 
