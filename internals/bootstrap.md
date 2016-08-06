@@ -19,6 +19,7 @@ Orange Mini lacks the following features:
 - Reference types
 - Named arguments
 - Parametric enums (e.g., just simple names for enum values)
+- Type inference (all variables must have types declared explicitly)
 
 The Orange Mini standard library has only the following classes:
 
