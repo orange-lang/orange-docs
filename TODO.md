@@ -1,2 +1,0 @@
-- Type and function attributes
-- Nullable types
