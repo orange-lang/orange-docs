@@ -65,7 +65,7 @@
 	* [Generic Types](core/generic.md)
 	* [C Interoperability](core/c_interop.md)
 	* [Preprocessor Conditionals](core/preprocessor.md)
-* [Standard Library]
+* [Standard Library](stdlib/README.md)
 	* [Extensions](stdlib/extensions.md)
 		* [For Each](stdlib/extensions.md)
 		* [Array Ranges](stdlib/extensions.md)
