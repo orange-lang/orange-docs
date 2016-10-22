@@ -6,7 +6,7 @@ This is the user guide for the Orange programming language. Orange is a statical
 - Support for third-party hooks into the compiler to enable language extensions
 - Minimal need for type annotations
 - Support for both OOP and structured programming
-- Tons of syntatic sugar that make code clear and consise
+- Tons of syntatic sugar that make code clear and concise 
 - Memory safe by default, easy to switch to unsafe
 - Builtin complex expressions like array ranges and tuples
 - Easily extend existing types, including POD types like int and bool.
