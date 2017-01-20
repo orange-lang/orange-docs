@@ -108,7 +108,7 @@ Guards are an if statement that executes before the rest of pattern is checked, 
 def isAlive(age: int64) {
 	return switch (age) {
 		_ if age > 200: {
-			// find out how
+			// find out their secret to eternal life
 			yield true
 		},
 		_ if age < 0: false,

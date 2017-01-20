@@ -5,7 +5,7 @@ Any existing type can have more methods defined on it, or implement an existing 
 Let's define a sum method on an array of `int`:
 
 ```
-extend int {
+extend int[] {
 	def sum() {
 		return for (var i, total = (0, 0); i < this.length; i++) {
 			yield total += this[i]
@@ -16,7 +16,7 @@ extend int {
 [0,1,2,3,4].sum() == 10 // true
 ```
 
-Inside an extension, `this` refers to the value the method is being called on. In this case, the type of `this` was `int&`.
+Inside an extension, `this` refers to the value the method is being called on. In this case, the type of `this` was `int[]&`.
 
 We can also extend a type to implement an interface (or shadow it if it's automatically generated):
 
@@ -39,6 +39,8 @@ extend Day : Ordered<Day> {
 			(l, r): return (l as int) < (r as int)
 		}
 	}
+
+	def operator>(lhs: Day, rhs: Day): !(lhs < rhs)
 }
 ```
 

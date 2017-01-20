@@ -11,7 +11,7 @@ Generic types and constraints are defined inside a `<>` section, which is placed
 
 The generic types defined are comma delimited, like `<T,V>`.
 
-Constraints also occur inside the generic section, prefixed with `where` (`<T,V where constraints`). Constraints are comma delimited and the only constraint at the moment is `=`, where the RHS of the expression is a base type or interface. `<T where T = Number<T>>` defines a generic type `T` where `T` must implement `Number`.
+Constraints also occur inside the generic section, prefixed with `where` (`<T,V where constraints>`). Constraints are comma delimited and the only constraint at the moment is `=`, where the RHS of the expression is a base type or interface. `<T where T = Number<T>>` defines a generic type `T` where `T` must implement `Number`.
 
 If when defining class members or function parameters, types can be omitted to be automatically assigned a generic type. For example:
 

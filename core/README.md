@@ -16,6 +16,6 @@ Orange omits the requirement of semicolons at the end of statements in most case
 
 Semicolons are the lowest-precedence operator, so an expression `a = b;` is parsed as `(a = b);`.
 
-Orange has no `main` function; a file can have code declared on a global scope. However, in a project, one file is designated as a "main" file. Only the main file will have its statements executed when the program is ran; other files only export types.
+Orange has no `main` function; a file has code declared on a file scope (think Python, Ruby, Javascript). However, in a compiled project, one file is designated as the "main" file. Only the main file will have its statements executed when the program is ran; other files only export types.
 
-`argv` is a global variable that can be used from the main file, of type `string[]`.
+`argv` is a global variable that is usable from the main file, of type `string[]`.
