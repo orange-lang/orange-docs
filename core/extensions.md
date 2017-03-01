@@ -1,6 +1,6 @@
 # Extensions
 
-Any existing type can have more methods defined on it, or implement an existing interface. This includes implementing methods on tuples, enums, strict aliases, classes, and arrays. You can even add new constructors!
+Any existing type can have more methods defined on it, or implement an existing interface. This includes implementing methods on tuples, enums, strict aliases, classes, and arrays. 
 
 Let's define a sum method on an array of `int`:
 
@@ -44,4 +44,12 @@ extend Day : Ordered<Day> {
 }
 ```
 
-This shadows the automatic implemented of `Ordered` for enums to assert that Friday is, and always will be, the best day.
+This shadows the default implementation of `Ordered` for enums to assert that Friday is, and always will be, the best day.
+
+You can only shadow interfaces and methods that are implemented by default; if any method or interface is defined explicitly, it cannot be shadowed for that type, even if the method is virtual. (Virtual methods may only be overriden in subtypes). 
+
+## Extending Constructors 
+
+It's also possible to add constructors to existing methods. This is synonymous with a "cast" if there's only one parameter. Like other methods, you can only define a constructor that has not been defined before, or shadow a default one (e.g., the copy constructor for a type). 
+
+Builtin types implement copy constructors and constructors for type conversions; these are considered concrete and may not be overriden. 
