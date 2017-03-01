@@ -1,6 +1,6 @@
 # Extensions
 
-Any existing type can have more methods defined on it, or implement an existing interface. This includes implementing methods on tuples, enums, strict aliases, classes, and arrays.
+Any existing type can have more methods defined on it, or implement an existing interface. This includes implementing methods on tuples, enums, strict aliases, classes, and arrays. You can even add new constructors!
 
 Let's define a sum method on an array of `int`:
 

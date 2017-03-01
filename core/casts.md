@@ -1,11 +1,20 @@
 # Casts
 
-Casts allow you to convert from one type to another. It is a static operator defined from one type to another via the `Castable<From, To>` interface.
+Casts allow you to convert from one type to another. Internally, they are implemented by adding a constructor via a type extension.
 
 All builtin numeric types can be casted interchangably, but note that some information may be lost in the casts.
 
-Casting is done via the `as` keyword.
+Casting is done by calling the type as if it was a function, with the argument being the value.
 
 ```
-5 as double // coerces 5 to be of type double
+double(5) // coerces 5 to be of type double
+int64(5.2) // coerces 5.2 to be of type int64
+```
+
+Example implementation:
+
+```
+extend double {
+	def double(v: int): /* internal implementation */
+}
 ```
