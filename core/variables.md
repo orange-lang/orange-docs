@@ -9,6 +9,16 @@ var myNumber: int     // type declared explicitly
 var myNumber          // ERROR: cannot infer type of myNumber
 ```
 
+## Default values
+
+When the initial value is omitted from the variable declaration, the _default constructor_ for the type is used. This means that all of these statements are equivalent:
+
+```
+var myNumber: int
+var myNumber: int = int()
+var myNumber = int()
+```
+
 ## Constant Variables
 
 A variable can be made immutable and constant by prefixing the declaration with `const`.

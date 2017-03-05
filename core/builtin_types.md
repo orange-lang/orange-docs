@@ -10,3 +10,10 @@ void
 ```
 
 Note that `string` is actually an [alias](aliases.md) to `char[]`, which means that any operation that can be done on a `char[]` can also be done on a `string`.
+
+Each of the builtin types (except for void) have a default value:
+
+- Number types: `0`
+- `char`: `\0`
+- `bool`: `false`
+- `string`: `""`
