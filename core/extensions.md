@@ -1,6 +1,6 @@
 # Extensions
 
-Any existing type can have more methods defined on it, or implement an existing interface. This includes implementing methods on tuples, enums, strict aliases, classes, and arrays. 
+Any existing type can have more methods defined on it, or implement an existing interface. This includes implementing methods on tuples, enums, strict aliases, classes, and arrays.
 
 Let's define a sum method on an array of `int`:
 
@@ -46,10 +46,39 @@ extend Day : Ordered<Day> {
 
 This shadows the default implementation of `Ordered` for enums to assert that Friday is, and always will be, the best day.
 
-You can only shadow interfaces and methods that are implemented by default; if any method or interface is defined explicitly, it cannot be shadowed for that type, even if the method is virtual. (Virtual methods may only be overriden in subtypes). 
+You can only shadow interfaces and methods that are implemented by default; if any method or interface is defined explicitly, it cannot be shadowed for that type, even if the method is virtual. (Virtual methods may only be overriden in subtypes).
 
-## Extending Constructors 
+## Extending Constructors
 
-It's also possible to add constructors to existing methods. This is synonymous with a "cast" if there's only one parameter. Like other methods, you can only define a constructor that has not been defined before, or shadow a default one (e.g., the copy constructor for a type). 
+It's also possible to add constructors to existing methods. This is synonymous with a "cast" if there's only one parameter. Like other methods, you can only define a constructor that has not been defined before, or shadow a default one (e.g., the copy constructor for a type).
 
-Builtin types implement copy constructors and constructors for type conversions; these are considered concrete and may not be overriden. 
+Builtin types implement copy constructors and constructors for type conversions; these are considered concrete and may not be overriden.
+
+## Generic Extensions
+
+Combining generics and extensions allow for adding behavior to _all_ types. This is used internally to implement some default behaviors, like the default constructor for compound types:
+
+```
+extend<T> T* {
+	// Default constructor for a pointer is a null value
+	def T(): null
+
+	// Access operator, allows for a.b instead of (*a).b
+	def operator.() -> T {
+		return *this
+	}
+}
+```
+
+```
+extend<T> T[] {
+	// Default constructor for an array is an empty array
+	def T(): []
+
+	def length() -> int {
+		// internal implementation
+	}
+}
+```
+
+Note that the restrictions on redefining functions for existing types still apply to generic extensions, so it would be wise to use generic extensions sparingly.
