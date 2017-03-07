@@ -43,3 +43,21 @@ var beerRequestResponse = if (yourAge == 20) {
 
 Console.Log(beerRequestResponse)
 ```
+
+## Conditions with Initializers
+
+Like C++17 and Go, Orange supports having a statement as the "first part" to an if block. The general form to a condition can be either `booleanCondition` or `statement; booleanCondition`.
+
+For example:
+
+```
+if (var yourAge = getAge(); yourAge == 20) {
+	yield "Almost there!"
+} elif (yourAge < 21) {
+	yield "You can't drink yet!"
+} else {
+	yield "Drink up!"
+}
+```
+
+The statements used in the condition part of the if blocks share scope with _all_ of the if blocks, including `elif` and `else`, so you can't redeclare the variable in an `elif` block (but you _can_ reassign to it).  

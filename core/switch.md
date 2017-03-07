@@ -24,6 +24,18 @@ switch (expression) {
 }
 ```
 
+## Switch Statement with Initializers
+
+Like the `if` statement, `switch` also supports initializers that share scope with all of its patterns:
+
+```
+switch (initializer; expression) {
+	pattern: expression,
+	pattern: expression,
+	// ...
+}
+```
+
 ## Patterns
 
 Patterns can do a lot of things:
