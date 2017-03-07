@@ -76,6 +76,66 @@ readonly property PropertyName: someExpression
 
 Note that `extend` supports defining properties on the extended type.
 
+## Default Constructors
+
+By default, every class has two constructors defined by default:
+
+1. The parameterless constructor
+2. A constructor that has one parameter for each public member
+
+For example, here is a class and an explicit list of default constructors:
+
+```
+class Vector {
+	var x: int
+	var y: int
+
+	// Default constructor defined here explicitly
+	Vector(x: int, y: int) {
+		this.x = x
+		thix.y = y
+	}
+
+	// Default constructor defined here explicitly
+	Vector() {
+		this.x = int() // initialize using the default ctor of int
+		this.y = int() // initialize using the default ctor of int
+	}
+}
+```
+
+These constructors allow you to create a vector by passing in the parameters by name: `Vector(x: 5, y: 20)`.
+
+## Optional parameters and RequireOne
+
+The previous example provided doesn't _fully_ match the default behavior, however: default constructors for members actually have _all_ parameters as optional.
+
+```
+class Vector {
+	var x: int
+	var y: int
+
+	// Default constructor defined here explicitly
+	@RequireOne
+	Vector(x: int = int(), y: int = int()) {
+		this.x = x
+		thix.y = y
+	}
+
+	// Default constructor defined here explicitly
+	Vector() {
+		this.x = int() // initialize using the default ctor of int
+		this.y = int() // initialize using the default ctor of int
+	}
+}
+```
+
+Now you can construct a vector with any number of its members, so both `Vector(x: 5)` and `Vector(y: 20)` are valid constructors, leaving the other members to their default values.
+
+Normally, there's an ambiguity here: we have a default constructor that takes zero parameters and another constructor that _can_ take zero parameters. If you construct a Vector using no arguments, which constructor do we use?
+
+The `@RequireOne` attribute on the constructor specifies that that function can only be used when _at least one_ argument is supplied. Through this the ambiguities are avoided and the proper constructor will always be called.
+
 ## Inheritance
 
 A class can implement a any number of interfaces or extend a single type.
