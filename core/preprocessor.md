@@ -1,11 +1,13 @@
 # Preprocessor Conditionals
 
-Orange allows for a very limited set of preprocessor conditionals that check if a certain preprocessor variable exists. If it does, the code inside the conditional will be compiled.
+Orange allow sfor a very limited set of preprocessor conditions that compile the code block if a certain preprocessor variable exists. 
 
-A preprocessor conditional works like a standard if statement, but the `if` chain begins with #.
+Note that unlike the C-family preprocessors, all branches will be checked for synantical errors, but type checking won't happen. 
+
+A preprocessor conditional works like a standard if statement, but is prefixed with `const`. 
 
 ```
-#if (MacOS) {
+const if (MacOS) {
 	// running MacOS
 } elif (Windows) {
 	// running Windows
