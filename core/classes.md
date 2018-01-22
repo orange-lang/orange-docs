@@ -46,6 +46,47 @@ weirdDog.bark() // => Woof. I am a 4 year old dog named Fido and I am a weird do
 
 The method on `Dog` called `Dog` is a constructor; it is a method that is called upon creation of the class type with all the provided parameters. The `~Dog` method is a descructor and is called when the object is out of scope (if it was created on the stack, or if deleted manually otherwise).
 
+## Modifying the receiver type of a method
+
+Along with the standard privacy flags and `static`, Orange allows adding
+other kinds of flags to modify the type of method that will be compiled. 
+
+By default, all methods will recieve an lvalue reference (`T&`) allowing for 
+modification of `this` and using it as any other normal object on the stack. 
+
+However, in some cases, it may be required or desired to use an rvalue instead. 
+This can be achieved in one of two ways:
+
+1. Using the `copied` flag before the `def` keyword
+2. Adding the type attribute `@Receiver(this)` before the function definition. 
+
+Without the `copied` flag, the compiler automatically injects the 
+`@Reciever(this&)` type attribute to all non-static methods. 
+
+The `@Receiver` type attribute is built-in to the compiler and only accepts 
+either `this` or `this&` as its parameter, where `this` refers to a type, not 
+an object.  
+
+Here's an example of using an rvalue on an exension to the `int` type: 
+
+```
+extent int {
+  // copied could be replaced with @Receiver(this) here
+  copied def abs() {
+    if (this < 0) {
+      return -this 
+    }
+
+    return this 
+  }
+}
+
+var num = 53 
+
+-5.abs() // 5 
+num.abs() // 53 
+```
+
 ## Properties
 
 Properties are methods that are used like normal object members. A property is defined with one or both of a getter and setter. If only a getter is defined, the property can not appear on the left-hand side of an assignment. If only a setter is defined, the property can not appear on the right-hand side of an assignment.
